@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         115转存助手ui优化版
 // @name:zh      115转存助手ui优化版
-// @description  2022.04.02 更新，115转存助手ui优化版 v3.5 (143.2022.0402.1)(based on Fake115Upload 1.4.3 @T3rry)
+// @description  2022.06.16 更新，115转存助手ui优化版 v3.6 (143.2022.0616.1)(based on Fake115Upload 1.4.3 @T3rry)
 // @author       Never4Ever
 // @namespace    Fake115Upload@Never4Ever
-// @version      143.2022.0402.1
+// @version      143.2022.0616.1
 // @match        https://115.com/*
 // @exclude      https://115.com/s/*
 
@@ -31,7 +31,7 @@
 
 /*********************************************
 请从以下获取最新版，或者遇到问题去此反馈，感谢
-https://gist.github.com/Nerver4Ever/953447c9ecd330ffc0861d4cbb839369
+https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
 **********************************************/
 
 /*针对网络问题，只能将不稳定的依赖库放置于此*/
@@ -729,19 +729,6 @@ https://gist.github.com/Nerver4Ever/953447c9ecd330ffc0861d4cbb839369
 })(this);
 
 
-/*GM_config_zh-CN.js*/
-
-// ==UserScript==
-// @name          GM_config_zh-CN
-// @author        Mike Medley & zxf10608
-// @version       1.3.7
-// @description   GM_config_中文版
-// @grant         GM_getValue
-// @grant         GM_setValue
-// @grant         GM_deleteValue
-// @exclude       *
-// @license       LGPL 3
-// ==/UserScript==
 
 /*
 优化说明
@@ -1797,16 +1784,16 @@ function waitForKeyElements(
 
     //版本信息
     const TIPS = {
-        CurrentVersion: "143.2022.0402.1",
-        LastUpdateDate: "2022.04.02",
-        VersionTips: "115转存助手ui优化版 v3.5",
-        UpdateUrl: "https://gist.github.com/Nerver4Ever/953447c9ecd330ffc0861d4cbb839369",
+        CurrentVersion: "143.2022.0616.1",
+        LastUpdateDate: "2022.06.16",
+        VersionTips: "115转存助手ui优化版 v3.6",
+        UpdateUrl: "https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper",
         Sha1FileInputDetails: "",
     };
 
     const WORKSETTINGS = {
-        WorkingItemsNumber: 4, //同时执行任务数
-        SleepLittleTime: 500, //短暂休眠,毫秒,暂时在转存中使用
+        WorkingItemsNumber: 3, //同时执行任务数
+        SleepLittleTime: 1000, //短暂休眠,毫秒,暂时在转存中使用
         SleepMoreTime: 1000, //长时休眠,毫秒,暂时在提取中使用
         SleepMuchMoreTime: 8000, //超长休眠,暂时未使用
         ANumber: 27, //随机数,暂时未使用
@@ -1995,40 +1982,40 @@ function waitForKeyElements(
                     default: true,
                 },
                 separator: {
-                    label: '分隔符方案(推荐生僻字；如果分隔符失效,请自行修改)：',
+                    label: '分隔符方案(使用生僻字，勿用标点；如果分隔符失效,请自行修改)：',
                     type: 'text',
-                    default: '變'
+                    default: '蠔'
                 },
                 uploadNumber: {
                     //section: ['时间参数设置', '注意：参数设置过快，会引起115服务器无响应，为稳定运行参数未启用！'],
                     //label: '转存同时工作任务数:',
                     labelPos: 'left',
                     type: 'hidden',
-                    default: '4',
+                    default: '3',
                 },
                 uploadSleepTime: {
                     //label: '转存间隔时间（毫秒）:',
                     labelPos: 'left',
                     type: 'hidden',
-                    default: '500',
+                    default: '1000',
                 },
                 downloadNumber: {
                     //label: '提取同时工作任务数:',
                     labelPos: 'left',
                     type: 'hidden',
-                    default: '4',
+                    default: '3',
                 },
                 downloadSleepTime: {
                     //label: '提取间隔时间（毫秒）:',
                     labelPos: 'left',
                     type: 'hidden',
-                    default: '1300',
+                    default: '2000',
                 },
                 createFolderSleepTime: {
                     //label: '目录创建间隔时间（毫秒）:',
                     labelPos: 'left',
                     type: 'hidden',
-                    default: '300',
+                    default: '600',
                 },
                 checkUpdate: {
                     //section: ['帮助&更新&反馈', '常见错误以及对本脚本进行更新检查与bug反馈'],
@@ -3312,6 +3299,7 @@ function waitForKeyElements(
                 }
                 item.extension = "";
                 item.formatedName = "";
+                item.formatedExtension=""
                 succeed = true;
             }
         }
@@ -3324,6 +3312,8 @@ function waitForKeyElements(
 
 
     function createUploadFile(urlData, postData) {
+        console.log("createUploadFile");
+        console.log(urlData)
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method: 'POST',
@@ -3364,7 +3354,6 @@ function waitForKeyElements(
 
         let fCid = `U_1_${targetFolder}`;
         let appVersion = "25.2.0";
-
         let urlData = UrlData({
             isp: 0,
             appid: 0,
@@ -3373,7 +3362,8 @@ function waitForKeyElements(
             sig: GetSig(uploadInfo.user_id, fileItem.sha1, fCid, uploadInfo.userkey)
         });
 
-
+        console.log("postData")
+        console.log("fileItem.formatedName")
         let postData = PostData({
             preid: fileItem.preid,
             fileid: fileItem.sha1,
@@ -3386,6 +3376,8 @@ function waitForKeyElements(
             userid: uploadInfo.user_id
 
         });
+
+        console.log(postData)
 
         const r = createUploadFile(urlData, postData);
 
@@ -3513,6 +3505,9 @@ function waitForKeyElements(
 
     }
 
+    function reverseString(str) {
+        return str.split("").reverse().join("");
+    }
     //解析inline text sha1 links,并根据配置设置分隔符;返回FileArray
     function parseSha1LinksToFileArray(text, nameSeparator, errorCallback) {
         let textLines = text.split(/\r?\n/);
@@ -3523,14 +3518,16 @@ function waitForKeyElements(
             if (!fLine) continue;
             let r = convertFromSha1Link(fLine);
             if (r.state) {
-                let nameStrings = r.fileItem.name.split(".");
-                let extension = nameStrings.pop();
-                r.fileItem.extension = extension;
+                //let nameStrings = r.fileItem.name.split(".");
+                //let extension = nameStrings.pop();
+                //r.fileItem.extension = extension;
+                //let formatedExtension=reverseString(extension);
                 //根据配置重新设置文件名
                 if (nameSeparator) {
                     //使用emoutils.js库来分割，带有emoji的文件名
-                    let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
-                    r.fileItem.formatedName = fileName + "." + extension;
+                    //let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
+                    //r.fileItem.formatedName = fileName + "." + formatedExtension;
+                    r.fileItem.formatedName=emojiUtils.toArray(r.fileItem.name).map(c => c + nameSeparator).join("").slice(0, -1);
                 } else {
                     r.fileItem.formatedName = r.fileItem.name;
                 }
@@ -3619,6 +3616,7 @@ function waitForKeyElements(
         let completed = fileLength - fileArray.length;
         let promisArray = new Array();
         let uploadInfo = await getUploadInfo();
+        console.log("uploadInfo")
         let msg;
         for (let file of fileArray) {
             if (getTaskCancelFlag()) {
@@ -3706,9 +3704,15 @@ function waitForKeyElements(
         }
 
         let selectedFiles = files.filter(f => f.formatedName.search(separator) != -1 && f.id).map(f => {
+            //let lastIndex=f.formatedName.lastIndexOf(".");
+            //let name=f.formatedName.substring(0,lastIndex);
+            //let ext=f.formatedName.substring(lastIndex+1);
+
             let fo = {
                 id: f.id,
-                name: f.formatedName.split(separator).join("")
+                //fix
+                //name: name.split(separator).join("")+"."+reverseString(ext)
+                name: f.formatedName.split(separator).join("")    
             };
             return fo;
         });
@@ -3761,9 +3765,14 @@ function waitForKeyElements(
 
 
         let selectedFiles = onlineFiles.filter(f => f.name.search(separator) != -1).map(f => {
+            //let lastIndex=f.name.lastIndexOf(".");
+            //let name=f.name.substring(0,lastIndex);
+            //let ext=f.name.substring(lastIndex+1);
+
             let fo = {
                 id: f.id,
-                name: f.name.split(separator).join("")
+                //name: name.split(separator).join("")+"."+reverseString(ext)
+                name:f.name.split(separator).join("")
             };
             return fo;
         });
