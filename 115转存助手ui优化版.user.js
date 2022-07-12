@@ -2889,6 +2889,7 @@ function waitForKeyElements(
     }
 
     async function getUploadHistory(offset, limit) {
+        console.log(`offset:${offset},limit:${limit}`);
         let historyFiles = [];
         let pUrl = `https://webapi.115.com/history/list?type=4&offset=${offset}&limit=${limit}`;
         const result = await $.ajax({
@@ -2915,7 +2916,7 @@ function waitForKeyElements(
         return historyFiles;
     }
 
-    async function getLastUploadFiles(count, delayTime = 200, processCallback) {
+    async function getLastUploadFiles(count, delayTime = 400, processCallback) {
         let files = [];
         let offset = 0;
         let limit = 115;
@@ -2928,10 +2929,12 @@ function waitForKeyElements(
             leftCount = leftCount - limit;
             await delay(delayTime);
         }
+
         if (leftCount > 0) {
             processCallback(`正在获取第${offset+1}-${offset+leftCount+1}个文件数据...`)
             let result = await getUploadHistory(offset, leftCount);
             result.forEach(f => files.push(f));
+            await delay(delayTime);
         }
 
         return files;
@@ -3687,12 +3690,14 @@ function waitForKeyElements(
             state: true,
             msg: "正在等待重命名...如果文件较多，请等待；或者停止，等以后手动操作去除分隔符。"
         });
+
+        console.log(history.length);
+        //console.log(history);
         //fix: v3.3.1 修复含有重复文件的时候，未所有完成重命名的bug
         history.forEach(q => q.isMarked = false);
         for (const file of files) {
-            //console.log("file")
-            //console.log(file)
-            let thisFile = history.find(q => q.sha1 == file.sha1 && q.parentID == file.parentID && q.name == file.formatedName && !q.isMarked);
+            console.log(file);
+            let thisFile = history.find(q => q.sha1 == file.sha1 && q.parentID == file.parentID && q.name.trim() == file.formatedName.trim() && !q.isMarked);
             //console.log("thisFile")
             //console.log(thisFile)
             if (thisFile) {
