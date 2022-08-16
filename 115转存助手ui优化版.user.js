@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         115转存助手ui优化版
 // @name:zh      115转存助手ui优化版
-// @description  2022.06.16 更新，115转存助手ui优化版 v3.6 (143.2022.0616.1)(based on Fake115Upload 1.4.3 @T3rry)
+// @description  2022.08.16 更新，115转存助手ui优化版 v3.7 (143.2022.0816.1)(based on Fake115Upload 1.4.3 @T3rry)
 // @author       Never4Ever
 // @namespace    Fake115Upload@Never4Ever
-// @version      143.2022.0616.1
+// @version      143.2022.0816.1
 // @match        https://115.com/*
 // @exclude      https://115.com/s/*
 
@@ -69,35 +69,35 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         };
         else if (0 === c.lastIndexOf("SHA-", 0))
             if (q = function (a, b) {
-                    return L(a, b, c)
-                }, u = function (a, b, h, e) {
-                    var k, f;
-                    if ("SHA-224" === c || "SHA-256" === c) k = (b + 65 >>> 9 << 4) + 15, f = 16;
-                    else if ("SHA-384" === c || "SHA-512" === c) k = (b + 129 >>> 10 <<
-                        5) + 31, f = 32;
-                    else throw Error("Unexpected error in SHA-2 implementation");
-                    for (; a.length <= k;) a.push(0);
-                    a[b >>> 5] |= 128 << 24 - b % 32;
-                    b = b + h;
-                    a[k] = b & 4294967295;
-                    a[k - 1] = b / 4294967296 | 0;
-                    h = a.length;
-                    for (b = 0; b < h; b += f) e = L(a.slice(b, b + f), e, c);
-                    if ("SHA-224" === c) a = [e[0], e[1], e[2], e[3], e[4], e[5], e[6]];
-                    else if ("SHA-256" === c) a = e;
-                    else if ("SHA-384" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a, e[4].b, e[5].a, e[5].b];
-                    else if ("SHA-512" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a,
-                        e[4].b, e[5].a, e[5].b, e[6].a, e[6].b, e[7].a, e[7].b
-                    ];
-                    else throw Error("Unexpected error in SHA-2 implementation");
-                    return a
-                }, r = function (a) {
-                    return a.slice()
-                }, "SHA-224" === c) m = 512, f = 224;
+                return L(a, b, c)
+            }, u = function (a, b, h, e) {
+                var k, f;
+                if ("SHA-224" === c || "SHA-256" === c) k = (b + 65 >>> 9 << 4) + 15, f = 16;
+                else if ("SHA-384" === c || "SHA-512" === c) k = (b + 129 >>> 10 <<
+                    5) + 31, f = 32;
+                else throw Error("Unexpected error in SHA-2 implementation");
+                for (; a.length <= k;) a.push(0);
+                a[b >>> 5] |= 128 << 24 - b % 32;
+                b = b + h;
+                a[k] = b & 4294967295;
+                a[k - 1] = b / 4294967296 | 0;
+                h = a.length;
+                for (b = 0; b < h; b += f) e = L(a.slice(b, b + f), e, c);
+                if ("SHA-224" === c) a = [e[0], e[1], e[2], e[3], e[4], e[5], e[6]];
+                else if ("SHA-256" === c) a = e;
+                else if ("SHA-384" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a, e[4].b, e[5].a, e[5].b];
+                else if ("SHA-512" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a,
+                e[4].b, e[5].a, e[5].b, e[6].a, e[6].b, e[7].a, e[7].b
+                ];
+                else throw Error("Unexpected error in SHA-2 implementation");
+                return a
+            }, r = function (a) {
+                return a.slice()
+            }, "SHA-224" === c) m = 512, f = 224;
             else if ("SHA-256" === c) m = 512, f = 256;
-        else if ("SHA-384" === c) m = 1024, f = 384;
-        else if ("SHA-512" === c) m = 1024, f = 512;
-        else throw Error("Chosen SHA variant is not supported");
+            else if ("SHA-384" === c) m = 1024, f = 384;
+            else if ("SHA-512" === c) m = 1024, f = 512;
+            else throw Error("Chosen SHA variant is not supported");
         else if (0 === c.lastIndexOf("SHA3-", 0) || 0 === c.lastIndexOf("SHAKE", 0)) {
             var F = 6;
             q = D;
@@ -282,7 +282,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         f = -1 === b ? 3 : 0;
         for (g = 0; g < n; g += 3)
             for (d = g + 1 < n ? c[g + 1 >>> 2] : 0, p = g + 2 < n ? c[g + 2 >>> 2] : 0, p = (c[g >>> 2] >>> 8 * (f + g % 4 * b) & 255) << 16 | (d >>> 8 * (f + (g + 1) % 4 * b) & 255) << 8 | p >>> 8 * (f +
-                    (g + 2) % 4 * b) & 255, d = 0; 4 > d; d += 1) 8 * g + 6 * d <= a ? h += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".charAt(p >>> 6 * (3 - d) & 63) : h += e.b64Pad;
+                (g + 2) % 4 * b) & 255, d = 0; 4 > d; d += 1) 8 * g + 6 * d <= a ? h += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".charAt(p >>> 6 * (3 - d) & 63) : h += e.b64Pad;
         return h
     }
 
@@ -371,14 +371,14 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
                                 h[u] |= l[m] << 8 * (t + r % 4 * b);
                                 p += 1
                             } else if ("UTF16BE" === a || "UTF16LE" === a)
-                                for (t = -1 === b ? 2 : 0, l = "UTF16LE" === a && 1 !== b || "UTF16LE" !== a && 1 === b, f = 0; f < c.length; f += 1) {
-                                    g = c.charCodeAt(f);
-                                    !0 === l && (m = g & 255, g = m << 8 | g >>> 8);
-                                    r = p + q;
-                                    for (u = r >>> 2; h.length <= u;) h.push(0);
-                                    h[u] |= g << 8 * (t + r % 4 * b);
-                                    p += 2
-                                }
+                        for (t = -1 === b ? 2 : 0, l = "UTF16LE" === a && 1 !== b || "UTF16LE" !== a && 1 === b, f = 0; f < c.length; f += 1) {
+                            g = c.charCodeAt(f);
+                            !0 === l && (m = g & 255, g = m << 8 | g >>> 8);
+                            r = p + q;
+                            for (u = r >>> 2; h.length <= u;) h.push(0);
+                            h[u] |= g << 8 * (t + r % 4 * b);
+                            p += 2
+                        }
                     return {
                         value: h,
                         binLen: 8 * p + d
@@ -596,24 +596,24 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
             d;
         if ("SHA-1" === c) a = [1732584193, 4023233417, 2562383102, 271733878, 3285377520];
         else if (0 === c.lastIndexOf("SHA-", 0)) switch (a = [3238371032, 914150663, 812702999, 4144912697, 4290775857, 1750603025, 1694076839, 3204075428], d = [1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225], c) {
-                case "SHA-224":
-                    break;
-                case "SHA-256":
-                    a = d;
-                    break;
-                case "SHA-384":
-                    a = [new b(3418070365, a[0]), new b(1654270250, a[1]), new b(2438529370, a[2]), new b(355462360, a[3]), new b(1731405415, a[4]), new b(41048885895, a[5]), new b(3675008525, a[6]), new b(1203062813, a[7])];
-                    break;
-                case "SHA-512":
-                    a = [new b(d[0], 4089235720), new b(d[1], 2227873595),
-                        new b(d[2], 4271175723), new b(d[3], 1595750129), new b(d[4], 2917565137), new b(d[5], 725511199), new b(d[6], 4215389547), new b(d[7], 327033209)
-                    ];
-                    break;
-                default:
-                    throw Error("Unknown SHA variant");
-            } else if (0 === c.lastIndexOf("SHA3-", 0) || 0 === c.lastIndexOf("SHAKE", 0))
-                for (c = 0; 5 > c; c += 1) a[c] = [new b(0, 0), new b(0, 0), new b(0, 0), new b(0, 0), new b(0, 0)];
-            else throw Error("No SHA variants supported");
+            case "SHA-224":
+                break;
+            case "SHA-256":
+                a = d;
+                break;
+            case "SHA-384":
+                a = [new b(3418070365, a[0]), new b(1654270250, a[1]), new b(2438529370, a[2]), new b(355462360, a[3]), new b(1731405415, a[4]), new b(41048885895, a[5]), new b(3675008525, a[6]), new b(1203062813, a[7])];
+                break;
+            case "SHA-512":
+                a = [new b(d[0], 4089235720), new b(d[1], 2227873595),
+                new b(d[2], 4271175723), new b(d[3], 1595750129), new b(d[4], 2917565137), new b(d[5], 725511199), new b(d[6], 4215389547), new b(d[7], 327033209)
+                ];
+                break;
+            default:
+                throw Error("Unknown SHA variant");
+        } else if (0 === c.lastIndexOf("SHA3-", 0) || 0 === c.lastIndexOf("SHAKE", 0))
+            for (c = 0; 5 > c; c += 1) a[c] = [new b(0, 0), new b(0, 0), new b(0, 0), new b(0, 0), new b(0, 0)];
+        else throw Error("No SHA variants supported");
         return a
     }
 
@@ -708,13 +708,13 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298
     ];
     V = [new b(d[0], 3609767458), new b(d[1], 602891725), new b(d[2], 3964484399), new b(d[3], 2173295548), new b(d[4], 4081628472), new b(d[5], 3053834265), new b(d[6], 2937671579), new b(d[7], 3664609560), new b(d[8], 2734883394), new b(d[9], 1164996542), new b(d[10], 1323610764), new b(d[11], 3590304994), new b(d[12], 4068182383), new b(d[13], 991336113), new b(d[14], 633803317), new b(d[15], 3479774868), new b(d[16], 2666613458), new b(d[17], 944711139), new b(d[18], 2341262773),
-        new b(d[19], 2007800933), new b(d[20], 1495990901), new b(d[21], 1856431235), new b(d[22], 3175218132), new b(d[23], 2198950837), new b(d[24], 3999719339), new b(d[25], 766784016), new b(d[26], 2566594879), new b(d[27], 3203337956), new b(d[28], 1034457026), new b(d[29], 2466948901), new b(d[30], 3758326383), new b(d[31], 168717936), new b(d[32], 1188179964), new b(d[33], 1546045734), new b(d[34], 1522805485), new b(d[35], 2643833823), new b(d[36], 2343527390), new b(d[37], 1014477480), new b(d[38], 1206759142), new b(d[39], 344077627),
-        new b(d[40], 1290863460), new b(d[41], 3158454273), new b(d[42], 3505952657), new b(d[43], 106217008), new b(d[44], 3606008344), new b(d[45], 1432725776), new b(d[46], 1467031594), new b(d[47], 851169720), new b(d[48], 3100823752), new b(d[49], 1363258195), new b(d[50], 3750685593), new b(d[51], 3785050280), new b(d[52], 3318307427), new b(d[53], 3812723403), new b(d[54], 2003034995), new b(d[55], 3602036899), new b(d[56], 1575990012), new b(d[57], 1125592928), new b(d[58], 2716904306), new b(d[59], 442776044), new b(d[60], 593698344), new b(d[61],
-            3733110249), new b(d[62], 2999351573), new b(d[63], 3815920427), new b(3391569614, 3928383900), new b(3515267271, 566280711), new b(3940187606, 3454069534), new b(4118630271, 4000239992), new b(116418474, 1914138554), new b(174292421, 2731055270), new b(289380356, 3203993006), new b(460393269, 320620315), new b(685471733, 587496836), new b(852142971, 1086792851), new b(1017036298, 365543100), new b(1126000580, 2618297676), new b(1288033470, 3409855158), new b(1501505948, 4234509866), new b(1607167915, 987167468), new b(1816402316,
+    new b(d[19], 2007800933), new b(d[20], 1495990901), new b(d[21], 1856431235), new b(d[22], 3175218132), new b(d[23], 2198950837), new b(d[24], 3999719339), new b(d[25], 766784016), new b(d[26], 2566594879), new b(d[27], 3203337956), new b(d[28], 1034457026), new b(d[29], 2466948901), new b(d[30], 3758326383), new b(d[31], 168717936), new b(d[32], 1188179964), new b(d[33], 1546045734), new b(d[34], 1522805485), new b(d[35], 2643833823), new b(d[36], 2343527390), new b(d[37], 1014477480), new b(d[38], 1206759142), new b(d[39], 344077627),
+    new b(d[40], 1290863460), new b(d[41], 3158454273), new b(d[42], 3505952657), new b(d[43], 106217008), new b(d[44], 3606008344), new b(d[45], 1432725776), new b(d[46], 1467031594), new b(d[47], 851169720), new b(d[48], 3100823752), new b(d[49], 1363258195), new b(d[50], 3750685593), new b(d[51], 3785050280), new b(d[52], 3318307427), new b(d[53], 3812723403), new b(d[54], 2003034995), new b(d[55], 3602036899), new b(d[56], 1575990012), new b(d[57], 1125592928), new b(d[58], 2716904306), new b(d[59], 442776044), new b(d[60], 593698344), new b(d[61],
+        3733110249), new b(d[62], 2999351573), new b(d[63], 3815920427), new b(3391569614, 3928383900), new b(3515267271, 566280711), new b(3940187606, 3454069534), new b(4118630271, 4000239992), new b(116418474, 1914138554), new b(174292421, 2731055270), new b(289380356, 3203993006), new b(460393269, 320620315), new b(685471733, 587496836), new b(852142971, 1086792851), new b(1017036298, 365543100), new b(1126000580, 2618297676), new b(1288033470, 3409855158), new b(1501505948, 4234509866), new b(1607167915, 987167468), new b(1816402316,
             1246189591)
     ];
     X = [new b(0, 1), new b(0, 32898), new b(2147483648, 32906), new b(2147483648, 2147516416), new b(0, 32907), new b(0, 2147483649), new b(2147483648, 2147516545), new b(2147483648, 32777), new b(0, 138), new b(0, 136), new b(0, 2147516425), new b(0, 2147483658), new b(0, 2147516555), new b(2147483648, 139), new b(2147483648, 32905), new b(2147483648, 32771), new b(2147483648, 32770), new b(2147483648, 128), new b(0, 32778), new b(2147483648, 2147483658), new b(2147483648, 2147516545), new b(2147483648, 32896), new b(0, 2147483649),
-        new b(2147483648, 2147516424)
+    new b(2147483648, 2147516424)
     ];
     W = [
         [0, 36, 3, 41, 18],
@@ -734,10 +734,10 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
 优化说明
     1、改成中文 "确定"、"取消" 按钮。
     2、select 新增了 textContents 数组。
-	3、新增了skin: 'tab'换页切换菜单样式
-	4、更新部分翻译
-	5、优化字体显示效果
-	6、优化同一行内CSS样式
+    3、新增了skin: 'tab'换页切换菜单样式
+    4、更新部分翻译
+    5、优化字体显示效果
+    6、优化同一行内CSS样式
 */
 
 
@@ -755,11 +755,11 @@ function GM_configInit(config, args) {
     // Initialize instance variables
     if (typeof config.fields == "undefined") {
         config.fields = {};
-        config.onInit = config.onInit || function () {};
-        config.onOpen = config.onOpen || function () {};
-        config.onSave = config.onSave || function () {};
-        config.onClose = config.onClose || function () {};
-        config.onReset = config.onReset || function () {};
+        config.onInit = config.onInit || function () { };
+        config.onOpen = config.onOpen || function () { };
+        config.onSave = config.onSave || function () { };
+        config.onClose = config.onClose || function () { };
+        config.onReset = config.onReset || function () { };
         config.isOpen = false;
         config.title = '用户脚本设置';
         config.css = {
@@ -1012,8 +1012,8 @@ GM_configStruct.prototype = {
 
             // Add save and close buttons
             bodyWrapper.appendChild(create('div', {
-                    id: configId + '_buttons_holder'
-                },
+                id: configId + '_buttons_holder'
+            },
 
                 create('button', {
                     id: configId + '_saveBtn',
@@ -1037,8 +1037,8 @@ GM_configStruct.prototype = {
                 }),
 
                 create('div', {
-                        className: 'reset_holder block'
-                    },
+                    className: 'reset_holder block'
+                },
 
                     // Reset link
                     create('a', {
@@ -1220,7 +1220,7 @@ GM_configStruct.prototype = {
                     if (b.indexOf("on") == 0)
                         A.addEventListener(b.substring(2), B[b], false);
                     else if (",style,accesskey,id,name,src,href,which,for".indexOf("," +
-                            b.toLowerCase()) != -1)
+                        b.toLowerCase()) != -1)
                         A.setAttribute(b, B[b]);
                     else if (typeof B[b] != 'undefined')
                         A[b] = B[b];
@@ -1393,8 +1393,8 @@ function GM_configField(settings, stored, id, customType) {
     // else use the default value passed through init()
     this['default'] = typeof settings['default'] == "undefined" ?
         customType ?
-        customType['default'] :
-        GM_configDefaultValue(settings.type, settings.options) :
+            customType['default'] :
+            GM_configDefaultValue(settings.type, settings.options) :
         settings['default'];
 
     // Store the field's value
@@ -1440,10 +1440,10 @@ GM_configField.prototype = {
         }
 
         var retNode = create('div', {
-                className: 'config_var',
-                id: configId + '_' + id + '_var',
-                title: field.title || ''
-            }),
+            className: 'config_var',
+            id: configId + '_' + id + '_var',
+            title: field.title || ''
+        }),
             firstProp;
 
         // Retrieve the first prop
@@ -1557,7 +1557,7 @@ GM_configField.prototype = {
             // else insert it after
             if (!labelPos)
                 labelPos = firstProp == "label" || type == "radio" ?
-                "left" : "right";
+                    "left" : "right";
 
             addLabel(labelPos, label, retNode);
         }
@@ -1603,7 +1603,7 @@ GM_configField.prototype = {
                     (unsigned ? ' 正 ' : 'n ') + '整数值';
 
                 if (isNaN(num) || (type.substr(0, 3) == 'int' &&
-                        Math.ceil(num) != Math.floor(num)) ||
+                    Math.ceil(num) != Math.floor(num)) ||
                     (unsigned && num < 0)) {
                     alert(warn + '.');
                     return null;
@@ -1725,7 +1725,7 @@ function waitForKeyElements(
         targetNodes = $(selectorTxt);
     else
         targetNodes = $(iframeSelector).contents()
-        .find(selectorTxt);
+            .find(selectorTxt);
 
     if (targetNodes && targetNodes.length > 0) {
         btargetsFound = true;
@@ -1763,12 +1763,12 @@ function waitForKeyElements(
         //--- Set a timer, if needed.
         if (!timeControl) {
             timeControl = setInterval(function () {
-                    waitForKeyElements(selectorTxt,
-                        actionFunction,
-                        bWaitOnce,
-                        iframeSelector
-                    );
-                },
+                waitForKeyElements(selectorTxt,
+                    actionFunction,
+                    bWaitOnce,
+                    iframeSelector
+                );
+            },
                 300
             );
             controlObj[controlKey] = timeControl;
@@ -1784,9 +1784,9 @@ function waitForKeyElements(
 
     //版本信息
     const TIPS = {
-        CurrentVersion: "143.2022.0616.1",
-        LastUpdateDate: "2022.06.16",
-        VersionTips: "115转存助手ui优化版 v3.6",
+        CurrentVersion: "143.2022.0816.1",
+        LastUpdateDate: "2022.08.16",
+        VersionTips: "115转存助手ui优化版 v3.7",
         UpdateUrl: "https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper",
         Sha1FileInputDetails: "",
     };
@@ -1964,7 +1964,7 @@ function waitForKeyElements(
                     default: true,
                 },
                 advancedRename: {
-                    label: '在目录的悬浮工具条处显示“去除分隔符”选项',
+                    label: '在目录的悬浮工具条处显示“遍历文件夹”选项',
                     labelPos: 'right',
                     type: 'checkbox',
                     default: false,
@@ -2350,6 +2350,7 @@ function waitForKeyElements(
         FILEDOWNLOAD: 12,
         MSGERROR: 13,
         JSINFO: 14,
+        FATALERRORUPLOAD:15
     };
 
     function createMessage(messageType, msg, id) {
@@ -2523,7 +2524,20 @@ function waitForKeyElements(
 
                         }
                     });
-                } else if (message.messageType == MessageType.END4UPLOAD) {
+                } else if(message.messageType == MessageType.FATALERRORUPLOAD){
+                    $itemContent.html(message.msg);
+                    Swal.getTitle().textContent = "上传遇到致命错误，已主动停止！";
+                    Swal.getCancelButton().style.display = "none";
+                    Swal.getDenyButton().style.display = "block";
+                    Swal.getDenyButton().addEventListener('click', e => {
+                        console.log("DenyButton click");
+                        console.log(message);
+                        window.location.href = "https://115.com/?cid=" + message.targetID + "&offset=0&tab=&mode=wangpan";
+                    });
+                    Swal.getFooter().style.display = "none";
+                    Swal.hideLoading();
+                }
+                else if (message.messageType == MessageType.END4UPLOAD) {
                     $itemContent.html(message.msg);
                     Swal.getTitle().textContent = "操作完成！";
                     Swal.getCancelButton().style.display = "none";
@@ -2922,7 +2936,7 @@ function waitForKeyElements(
         let limit = 115;
         let leftCount = count;
         while (leftCount >= limit) {
-            processCallback(`正在获取第${offset+1}-${offset+limit+1}个文件数据...`)
+            processCallback(`正在获取第${offset + 1}-${offset + limit + 1}个文件数据...`)
             let result = await getUploadHistory(offset, limit);
             result.forEach(f => files.push(f));
             offset = offset + limit;
@@ -2931,7 +2945,7 @@ function waitForKeyElements(
         }
 
         if (leftCount > 0) {
-            processCallback(`正在获取第${offset+1}-${offset+leftCount+1}个文件数据...`)
+            processCallback(`正在获取第${offset + 1}-${offset + leftCount + 1}个文件数据...`)
             let result = await getUploadHistory(offset, leftCount);
             result.forEach(f => files.push(f));
             await delay(delayTime);
@@ -3116,7 +3130,7 @@ function waitForKeyElements(
         };
     })();
 
-    function downloadAFile(fileItem, progressCallback = function (text) {}) {
+    function downloadAFile(fileItem, progressCallback = function (text) { }) {
         console.log("downloadAFile")
         console.log(fileItem)
         const r = new Promise((resolve, reject) => {
@@ -3183,7 +3197,7 @@ function waitForKeyElements(
 
                                     },
                                     onprogress: function (event) {
-                                        let textMsg = `${event.loaded} of ${event.total} bytes, ${(event.loaded/event.total).toFixed(4)*100}%`;
+                                        let textMsg = `${event.loaded} of ${event.total} bytes, ${(event.loaded / event.total).toFixed(4) * 100}%`;
                                         console.log(textMsg);
                                         progressCallback(textMsg)
                                     }
@@ -3222,6 +3236,9 @@ function waitForKeyElements(
         return r;
     }
 
+    function replaceDot(name) {
+        return name.replace(/\./g, "_");
+    }
     //windows平台上限制的字符：/\|":*?<> 其他平台比windows宽泛一些
     function repalceValidatedName(name) {
         return name.replace(/</g, '[')
@@ -3259,7 +3276,7 @@ function waitForKeyElements(
 
             succeed = true;
         }
-        if(!succeed){
+        if (!succeed) {
             console.error(fileItem);
         }
 
@@ -3302,7 +3319,7 @@ function waitForKeyElements(
                 }
                 item.extension = "";
                 item.formatedName = "";
-                item.formatedExtension=""
+                item.formatedExtension = ""
                 succeed = true;
             }
         }
@@ -3331,7 +3348,8 @@ function waitForKeyElements(
                     let data = {
                         state: false,
                         error: "",
-                        pickCode: ""
+                        pickCode: "",
+                        fatalError: false
                     };
                     if (response.status === 200 && response.response.status === 2) {
                         data.state = true;
@@ -3340,6 +3358,7 @@ function waitForKeyElements(
                         console.error(response);
                         let error = "或许sha1链接不匹配(?)";
                         if (response.status === 405) {
+                            data.fatalError = true;
                             error = "频繁请求，被115限制 ([!]立即停止，尝试停止操作半小时或者重新登录)：" + response.statusText;
                         } else if (response.response && response.response.message) error = response.response.message;
                         else if (response.response && response.response.statusmsg) error = "可能参数不正确(?)：" + response.response.statusmsg;
@@ -3389,6 +3408,7 @@ function waitForKeyElements(
                 fileItem.state = t.state;
                 fileItem.pickCode = t.pickCode;
                 resole({
+                    fatalError: t.fatalError,
                     state: t.state,
                     error: t.error,
                     fileItem: fileItem
@@ -3411,7 +3431,7 @@ function waitForKeyElements(
             }),
             responseType: 'json',
             onload: function (response) {
-                if (response.status === 200) {}
+                if (response.status === 200) { }
             }
         });
     }
@@ -3530,7 +3550,7 @@ function waitForKeyElements(
                     //使用emoutils.js库来分割，带有emoji的文件名
                     //let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
                     //r.fileItem.formatedName = fileName + "." + formatedExtension;
-                    r.fileItem.formatedName=emojiUtils.toArray(r.fileItem.name).map(c => c + nameSeparator).join("").slice(0, -1);
+                    r.fileItem.formatedName = emojiUtils.toArray(replaceDot(r.fileItem.name)).map(c => c + nameSeparator).join("").slice(0, -1);
                 } else {
                     r.fileItem.formatedName = r.fileItem.name;
                 }
@@ -3565,7 +3585,7 @@ function waitForKeyElements(
 
             if (i != 0) {
 
-                newFolderName = `${folderName==""?"auto_create":folderName}@${getCurrentTimeString()}`;
+                newFolderName = `${folderName == "" ? "auto_create" : folderName}@${getCurrentTimeString()}`;
             }
 
             processCallback && processCallback(`正在自动创建目录${newFolderName}...`);
@@ -3600,6 +3620,7 @@ function waitForKeyElements(
         console.log('uploadFileWithTimeOut')
         let to = delay(timeOut).then(t => {
             return {
+                fatalError: false,
                 state: false,
                 error: `等待上传结果超时，此乃警告！成功与否，看最后统计结果！`,
                 fileItem: file
@@ -3621,10 +3642,14 @@ function waitForKeyElements(
         let uploadInfo = await getUploadInfo();
         console.log("uploadInfo")
         let msg;
+        let fatalError = false;
         for (let file of fileArray) {
             if (getTaskCancelFlag()) {
                 console.log("转存取消");
                 //postSha1Messgae(createMessage(MessageType.PROCESSING, "已取消，正在等待进行中的任务结束..."));
+                break;
+            }
+            if (fatalError) {
                 break;
             }
             console.log(file);
@@ -3641,6 +3666,12 @@ function waitForKeyElements(
                         msg: uploadError
                     });
                     msg = `<div align="right"><b>${completed}</b> | <b>${fileLength}</b></div><hr>${uploadError}`;
+
+                    if (t.fatalError) {
+                        console.log("fatalError");
+                        fatalError = true;
+                    }
+
                 }
                 resultCallback && resultCallback({
                     state: true,
@@ -3651,7 +3682,7 @@ function waitForKeyElements(
             promisArray.push(r);
 
             if (index % workingNumber == 0) {
-                await delay(sleepTime);
+                await delay(sleepTime*1.5);
             }
 
             if (index % 128 == 0) {
@@ -3672,7 +3703,7 @@ function waitForKeyElements(
         await delay(500);
         await Promise.all(promisArray);
 
-        return fileArray;
+        return fatalError;
     }
 
 
@@ -3688,7 +3719,7 @@ function waitForKeyElements(
 
         resultCallback({
             state: true,
-            msg: "正在等待重命名...如果文件较多，请等待；或者停止，等以后手动操作去除分隔符。"
+            msg: "正在等待重命名...如果文件较多，请等待"
         });
 
         console.log(history.length);
@@ -3717,7 +3748,7 @@ function waitForKeyElements(
                 id: f.id,
                 //fix
                 //name: name.split(separator).join("")+"."+reverseString(ext)
-                name: f.formatedName.split(separator).join("")    
+                name: f.name
             };
             return fo;
         });
@@ -3768,7 +3799,7 @@ function waitForKeyElements(
             }
         });
 
-
+        /* 20220816暂时下线手动去除分隔符，改为遍历文件夹
         let selectedFiles = onlineFiles.filter(f => f.name.search(separator) != -1).map(f => {
             //let lastIndex=f.name.lastIndexOf(".");
             //let name=f.name.substring(0,lastIndex);
@@ -3777,7 +3808,7 @@ function waitForKeyElements(
             let fo = {
                 id: f.id,
                 //name: name.split(separator).join("")+"."+reverseString(ext)
-                name:f.name.split(separator).join("")
+                name: f.name.split(separator).join("")
             };
             return fo;
         });
@@ -3807,6 +3838,7 @@ function waitForKeyElements(
             }
             await delay(sleepTime);
         }
+        */
 
     }
 
@@ -3915,13 +3947,24 @@ function waitForKeyElements(
         postSha1Messgae(createMessage(MessageType.SHOWCANCEl));
         console.log(files.length);
         //文件上传
-        await processUpload(files, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
+        let hasFatalError= await processUpload(files, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
             if (result.state === true) {
                 postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
             } else {
                 postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
             }
         });
+
+        if(hasFatalError){
+            let msg=`频繁请求，被115限制 (尝试停止操作半小时或者重新登录)<br>\
+            获取最新版，或者遇到问题去此反馈，感谢 !点击-> <a href="${TIPS.UpdateUrl}" target="_blank">${TIPS.VersionTips}</a>`;
+            postSha1Messgae(createMessage(MessageType.FATALERRORUPLOAD, msg, newTargetCid));
+            return;
+        }
+        
+
+        
+
         let isTaskCanceled = getTaskCancelFlag();
 
         postSha1Messgae(createMessage(MessageType.HIDECANCEL));
@@ -4180,7 +4223,7 @@ function waitForKeyElements(
 
             msg = `
             完成【 <b>${txtName}</b> 】提取！<hr><br>
-            总共<b>${allFiles.length}</b> ，取消或者失败 <b>${allFiles.length-succeedArray.length}</b>。<br>
+            总共<b>${allFiles.length}</b> ，取消或者失败 <b>${allFiles.length - succeedArray.length}</b>。<br>
             取消后，若未移动文件夹，可导入继续提取。<br>
             点击-> <a href="${TIPS.UpdateUrl}" target="_blank">${TIPS.VersionTips}</a>，获取最新版与反馈！
             `;
@@ -4369,9 +4412,9 @@ function waitForKeyElements(
             });
         }
 
-        var textArea=document.querySelector("#js_offline_new_add");
-        if(textArea){
-            textArea.style.height="100px";
+        var textArea = document.querySelector("#js_offline_new_add");
+        if (textArea) {
+            textArea.style.height = "100px";
         }
 
         if (document.getElementById('neSelectFile') == null) {
@@ -4626,13 +4669,13 @@ function waitForKeyElements(
 
 
     function renameInToolTip(element, pItem) {
-        var $btn1 = $('<a><i></i><span>去除分隔符</span></a>');
+        var $btn1 = $('<a><i></i><span>遍历文件夹</span></a>');
         $btn1.prependTo(element);
         $btn1[0].addEventListener('click', async e => {
             let separator = GM_config.get(currentConfig.separator);
             let sleepTime = GM_config.get(currentConfig.createFolderSleepTime);
             postSha1Messgae(createMessage(MessageType.BEGIN4UPLOAD, ""));
-            postSha1Messgae(createMessage(MessageType.PROCESSING, `即将开始重命名 【${pItem.name}】 下所有文件：<br><br>去除分隔符：${separator}`));
+            postSha1Messgae(createMessage(MessageType.PROCESSING, `即将开始遍历 【${pItem.name}】 下所有文件：<br>`));
             await delay(1000);
             await processRename(pItem.id, separator, sleepTime, result => {
                 if (result.state === true) {
