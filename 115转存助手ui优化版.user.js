@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         115转存助手ui优化版
 // @name:zh      115转存助手ui优化版
-// @description  2022.08.16 更新，115转存助手ui优化版 v3.7 (143.2022.0816.1)(based on Fake115Upload 1.4.3 @T3rry)
+// @description  2022.08.18 更新，115转存助手ui优化版 v3.8.1 (143.2022.0818.2)(based on Fake115Upload 1.4.3 @T3rry)
 // @author       Never4Ever
 // @namespace    Fake115Upload@Never4Ever
-// @version      143.2022.0816.1
+// @version      143.2022.0818.2
 // @match        https://115.com/*
 // @exclude      https://115.com/s/*
 
@@ -1782,11 +1782,58 @@ function waitForKeyElements(
 (function () {
     'use strict';
 
+    //types to change
+    //类型匹配: 
+    //'c':['a','b']  代表file.a,  file.b中变成file.a.c,  file.b.c
+    const FileTypes={
+        'tiff':['jpg','jpeg','png','gif','bmp','webp','tiff','tif','ico','svg','svgz','raw','cr2','crw','dcr','dng','erf','fff','gpr','iiq','k25','kdc','mdc','mef','mos','mrw','nef','nrw','orf','pef','ptx','pxn','r3d','raf','raw','rw2','rwl','rwz','sr2','srf','srw','x3f','xbm','xif','xpm','xwd'],
+        'iso':['mp4','webm','ogg','ogv','avi','mov','wmv','flv','mkv','mpeg','mpg','m4v','3gp','3g2','ts','m2v','m2ts','rmvb'],
+        'txt':['txt']
+    }
+   
+
+    function changeType(originType){
+        let extension=originType.toLowerCase();
+        let changedType='';
+        for(let type in FileTypes){
+            if(FileTypes[type].includes(extension)){
+                changedType=type;
+                break;
+            }
+        }
+        //if(changedType==''){
+        //    changedType=`${originType}`;
+        //}
+        
+        return changedType;
+    }
+
+    function changeNameBack(fileName){
+        let name=fileName.toLowerCase();
+        let originName=fileName;
+        console.log(`Name: ${fileName}`)
+        for(let type in FileTypes){
+            for(let ext of FileTypes[type]){
+                if(name.endsWith(`.${ext}.${type}`)){
+                    console.log(`addedType:${type}`)
+                    console.log(type.length)
+                    originName=originName.slice(0,-(type.length+1));
+                    console.log(`originName: ${originName}`)
+                    return originName;
+                }
+            } 
+        }
+        console.log(`originName: ${originName}`)
+        return originName;
+    }
+
+
+
     //版本信息
     const TIPS = {
-        CurrentVersion: "143.2022.0816.1",
-        LastUpdateDate: "2022.08.16",
-        VersionTips: "115转存助手ui优化版 v3.7",
+        CurrentVersion: "143.2022.0818.2",
+        LastUpdateDate: "2022.08.18",
+        VersionTips: "115转存助手ui优化版 v3.8.1",
         UpdateUrl: "https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper",
         Sha1FileInputDetails: "",
     };
@@ -1963,12 +2010,12 @@ function waitForKeyElements(
                     type: 'checkbox',
                     default: true,
                 },
-                advancedRename: {
-                    label: '在目录的悬浮工具条处显示“遍历文件夹”选项',
-                    labelPos: 'right',
-                    type: 'checkbox',
-                    default: false,
-                },
+                //advancedRename: {
+                //    label: '在目录的悬浮工具条处显示“遍历文件夹”选项',
+                //    labelPos: 'right',
+                //    type: 'checkbox',
+                //    default: false,
+                //},
                 autoUseSeparator: {
                     label: '自动给文件名添加分隔符进行上传，以防文件名违规',
                     labelPos: 'right',
@@ -2104,6 +2151,16 @@ function waitForKeyElements(
     function HandleUidDiv(node) {
         node.hide();
         console.log("set uiddiv");
+    }
+
+    waitForKeyElements('.list-contents > ul > li[ico="tiff"]', changeImageExtensionInHtml);
+
+    function changeImageExtensionInHtml(node){
+        let title=$(node).attr("title");
+        //$(node).attr("title",`${title}.pic`);
+        let $a= $(node).find(`a[title="${title}"]`)
+        $a.attr("title",`${title}.pic`);
+        //(function(){ $(".list-contents > ul > li").each(function(i, item) {if($(this).attr('title').substr(-1) == '.'){$(this).attr('iv',1);}});})
     }
 
     //#region 20201230新的提取api相关
@@ -2350,7 +2407,7 @@ function waitForKeyElements(
         FILEDOWNLOAD: 12,
         MSGERROR: 13,
         JSINFO: 14,
-        FATALERRORUPLOAD:15
+        FATALERRORUPLOAD: 15
     };
 
     function createMessage(messageType, msg, id) {
@@ -2524,7 +2581,7 @@ function waitForKeyElements(
 
                         }
                     });
-                } else if(message.messageType == MessageType.FATALERRORUPLOAD){
+                } else if (message.messageType == MessageType.FATALERRORUPLOAD) {
                     $itemContent.html(message.msg);
                     Swal.getTitle().textContent = "上传遇到致命错误，已主动停止！";
                     Swal.getCancelButton().style.display = "none";
@@ -2871,6 +2928,28 @@ function waitForKeyElements(
             await delay(200);
         }
 
+    }
+
+    async function renameFile(id, name) {
+        let data = {
+            fid: id,
+            file_name: name
+        };
+        let renameUrl = "https://webapi.115.com/files/edit";
+        const result = await $.ajax({
+            type: 'POST',
+            url: renameUrl,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                //'Origin': 'https://115.com'
+            },
+            dataType: "json",
+            xhrFields: {
+                withCredentials: true
+            },
+            data: data
+        });
+        return result;
     }
 
     //批量重命名 fileArray  [{id:id,name:ddd}]
@@ -3238,10 +3317,11 @@ function waitForKeyElements(
 
     function replaceDot(name) {
         return name.replace(/\./g, "_");
+        return name;
     }
     //windows平台上限制的字符：/\|":*?<> 其他平台比windows宽泛一些
     function repalceValidatedName(name) {
-        return name.replace(/</g, '[')
+        let newName= name.replace(/</g, '[')
             .replace(/>/g, ']')
             .replace(/\|/g, '_')
             .replace(/:/g, '_')
@@ -3250,6 +3330,11 @@ function waitForKeyElements(
             .replace(/\*/g, '_')
             .replace(/"/g, '\'')
             .replace(/\?/g, '_');
+
+        if(newName.startsWith(".")){
+            newName=newName.slice(1);
+        }
+        return newName;
     }
     //格式化sha1 链接
     //return type: {state:succeed,msg:""}
@@ -3258,6 +3343,8 @@ function waitForKeyElements(
     function convertToSha1Link(fileItem, isSimpleFormat) {
         var succeed = false;
         var msg = "格式生成失败!";
+        //3.8
+        fileItem.name=changeNameBack(fileItem.name);
         if (fileItem.name && fileItem.size && fileItem.sha1 && fileItem.preid) {
             var sha1Link = "115://" + repalceValidatedName(fileItem.name) + "|" + fileItem.size + "|" + fileItem.sha1 + "|" + fileItem.preid;
             if (!isSimpleFormat) {
@@ -3541,7 +3628,17 @@ function waitForKeyElements(
             if (!fLine) continue;
             let r = convertFromSha1Link(fLine);
             if (r.state) {
-                //let nameStrings = r.fileItem.name.split(".");
+                let nameStrings = r.fileItem.name.split(".");
+                let name= r.fileItem.name;
+                if(nameStrings.length>1){
+                    let extension = nameStrings.pop();
+                    r.fileItem.extension = extension;
+                    r.fileItem.formatedExtension=changeType(extension);
+                    console.log(`formatedExtension:${r.fileItem.formatedExtension}`)
+                }
+                else{
+                    name = r.fileItem.name;
+                }
                 //let extension = nameStrings.pop();
                 //r.fileItem.extension = extension;
                 //let formatedExtension=reverseString(extension);
@@ -3550,7 +3647,15 @@ function waitForKeyElements(
                     //使用emoutils.js库来分割，带有emoji的文件名
                     //let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
                     //r.fileItem.formatedName = fileName + "." + formatedExtension;
-                    r.fileItem.formatedName = emojiUtils.toArray(replaceDot(r.fileItem.name)).map(c => c + nameSeparator).join("").slice(0, -1);
+                    if(r.fileItem.formatedExtension&&r.fileItem.formatedExtension!=""){
+                        r.fileItem.formatedName=emojiUtils.toArray(r.fileItem.name).map(c => c+nameSeparator).join("").slice(0, -1)+"."+r.fileItem.formatedExtension;
+                    }else if(r.fileItem.extension){
+                        r.fileItem.formatedName=emojiUtils.toArray(name).map(c => c+nameSeparator).join("").slice(0, -1)+"."+r.fileItem.extension;
+                    }
+                    else{
+                        r.fileItem.formatedName=emojiUtils.toArray(name).map(c => c+nameSeparator).join("").slice(0, -1);
+                    }
+                    console.log(`formatedName:${r.fileItem.formatedName}`)
                 } else {
                     r.fileItem.formatedName = r.fileItem.name;
                 }
@@ -3682,7 +3787,7 @@ function waitForKeyElements(
             promisArray.push(r);
 
             if (index % workingNumber == 0) {
-                await delay(sleepTime*1.5);
+                await delay(sleepTime * 1.5);
             }
 
             if (index % 128 == 0) {
@@ -3750,10 +3855,53 @@ function waitForKeyElements(
                 //name: name.split(separator).join("")+"."+reverseString(ext)
                 name: f.name
             };
+
+            if(f.formatedExtension){
+                fo.name=`${f.name}.${f.formatedExtension}`;
+            }
+
             return fo;
         });
         console.log(selectedFiles)
-        let i, j, temporary, chunk = 115;
+
+        /*
+        let renameIndex=1;
+        let renameCount=selectedFiles.length;
+        for (const sendFile of selectedFiles) {
+            console.log(sendFile);
+            let t=await renameFile(sendFile.id,sendFile.name);
+            console.log(t);
+            if(t.state==true){
+                resultCallback && resultCallback({
+                    state: true,
+                    msg: `${renameIndex}|${renameCount}<br/>重命名${sendFile.name}成功!`
+                });
+            }
+            else{
+                resultCallback && resultCallback({
+                    state: false,
+                    msg: `${renameIndex}|${renameCount}<br/>重命名${sendFile.name}失败!`
+                });
+            }
+            await delay(300);
+            renameIndex++;
+
+            if (renameIndex % 128 == 0) {
+                let seconds = 3;
+                for (let i = 0; i < seconds; i++) {
+                    resultCallback && resultCallback({
+                        state: true,
+                        msg: `防止115服务器限制，暂停发包。<br><br>${seconds - i}秒后继续....`
+                    });
+                    await delay(1000);
+                }
+            }
+        }
+        */
+           
+        
+         
+let i, j, temporary, chunk = 115;
         for (i = 0, j = selectedFiles.length; i < j; i += chunk) {
             temporary = selectedFiles.slice(i, i + chunk);
             resultCallback && resultCallback({
@@ -3778,6 +3926,8 @@ function waitForKeyElements(
             }
             await delay(sleepTime);
         }
+         
+
 
     }
 
@@ -3947,7 +4097,7 @@ function waitForKeyElements(
         postSha1Messgae(createMessage(MessageType.SHOWCANCEl));
         console.log(files.length);
         //文件上传
-        let hasFatalError= await processUpload(files, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
+        let hasFatalError = await processUpload(files, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
             if (result.state === true) {
                 postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
             } else {
@@ -3955,15 +4105,15 @@ function waitForKeyElements(
             }
         });
 
-        if(hasFatalError){
-            let msg=`频繁请求，被115限制 (尝试停止操作半小时或者重新登录)<br>\
+        if (hasFatalError) {
+            let msg = `频繁请求，被115限制 (尝试停止操作半小时或者重新登录)<br>\
             获取最新版，或者遇到问题去此反馈，感谢 !点击-> <a href="${TIPS.UpdateUrl}" target="_blank">${TIPS.VersionTips}</a>`;
             postSha1Messgae(createMessage(MessageType.FATALERRORUPLOAD, msg, newTargetCid));
             return;
         }
-        
 
-        
+
+
 
         let isTaskCanceled = getTaskCancelFlag();
 
@@ -4729,7 +4879,7 @@ function waitForKeyElements(
         jNode[0].style.left = "180px";
         //目录，去除分隔符
         if (pItem.isFolder && GM_config.get(currentConfig.advancedRename)) {
-            renameInToolTip(jNode[0], pItem);
+           // renameInToolTip(jNode[0], pItem);
         }
 
         //add: v3.4 增加设置是否显示 列表模式下获取sha1
