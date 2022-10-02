@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         115转存助手ui优化版
 // @name:zh      115转存助手ui优化版
-// @description  2022.08.18 更新，115转存助手ui优化版 v3.8.1 (143.2022.0818.2)(based on Fake115Upload 1.4.3 @T3rry)
+// @description  2022.06.16 更新，115转存助手ui优化版 v3.6 (143.2022.0616.1)(based on Fake115Upload 1.4.3 @T3rry)
 // @author       Never4Ever
 // @namespace    Fake115Upload@Never4Ever
-// @version      143.2022.0818.2
+// @version      143.2022.0616.1
 // @match        https://115.com/*
 // @exclude      https://115.com/s/*
 
@@ -26,13 +26,15 @@
 // @require      https://unpkg.zhimg.com/sweetalert2@11.3.0
 // @require      https://unpkg.zhimg.com/node-forge@0.10.0/dist/forge.min.js
 // @require      https://unpkg.zhimg.com/emoutils@2.0.0/dist/umd/emoutils.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js
+
 // ==/UserScript==
 
 
 /*********************************************
-请从以下获取最新版，或者遇到问题去此反馈，感谢
-https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
-**********************************************/
+ 请从以下获取最新版，或者遇到问题去此反馈，感谢
+ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
+ **********************************************/
 
 /*针对网络问题，只能将不稳定的依赖库放置于此*/
 
@@ -87,7 +89,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
                 else if ("SHA-256" === c) a = e;
                 else if ("SHA-384" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a, e[4].b, e[5].a, e[5].b];
                 else if ("SHA-512" === c) a = [e[0].a, e[0].b, e[1].a, e[1].b, e[2].a, e[2].b, e[3].a, e[3].b, e[4].a,
-                e[4].b, e[5].a, e[5].b, e[6].a, e[6].b, e[7].a, e[7].b
+                    e[4].b, e[5].a, e[5].b, e[6].a, e[6].b, e[7].a, e[7].b
                 ];
                 else throw Error("Unexpected error in SHA-2 implementation");
                 return a
@@ -131,7 +133,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
                 a[n - 1] ^= 2147483648;
                 for (b = D(a, b); 32 * g.length < h;) {
                     a = b[l %
-                        5][l / 5 | 0];
+                    5][l / 5 | 0];
                     g.push(a.b);
                     if (32 * g.length >= h) break;
                     g.push(a.a);
@@ -364,7 +366,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
                     q = d >>> 3;
                     if ("UTF8" === a)
                         for (t = -1 ===
-                            b ? 3 : 0, f = 0; f < c.length; f += 1)
+                        b ? 3 : 0, f = 0; f < c.length; f += 1)
                             for (g = c.charCodeAt(f), l = [], 128 > g ? l.push(g) : 2048 > g ? (l.push(192 | g >>> 6), l.push(128 | g & 63)) : 55296 > g || 57344 <= g ? l.push(224 | g >>> 12, 128 | g >>> 6 & 63, 128 | g & 63) : (f += 1, g = 65536 + ((g & 1023) << 10 | c.charCodeAt(f) & 1023), l.push(240 | g >>> 18, 128 | g >>> 12 & 63, 128 | g >>> 6 & 63, 128 | g & 63)), m = 0; m < l.length; m += 1) {
                                 r = p + q;
                                 for (u = r >>> 2; h.length <= u;) h.push(0);
@@ -606,7 +608,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
                 break;
             case "SHA-512":
                 a = [new b(d[0], 4089235720), new b(d[1], 2227873595),
-                new b(d[2], 4271175723), new b(d[3], 1595750129), new b(d[4], 2917565137), new b(d[5], 725511199), new b(d[6], 4215389547), new b(d[7], 327033209)
+                    new b(d[2], 4271175723), new b(d[3], 1595750129), new b(d[4], 2917565137), new b(d[5], 725511199), new b(d[6], 4215389547), new b(d[7], 327033209)
                 ];
                 break;
             default:
@@ -626,7 +628,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         g = a[3];
         l = a[4];
         for (f = 0; 80 > f; f += 1) b[f] = 16 > f ? c[f] : y(b[f -
-            3] ^ b[f - 8] ^ b[f - 14] ^ b[f - 16], 1), p = 20 > f ? H(y(e, 5), d & n ^ ~d & g, l, 1518500249, b[f]) : 40 > f ? H(y(e, 5), d ^ n ^ g, l, 1859775393, b[f]) : 60 > f ? H(y(e, 5), U(d, n, g), l, 2400959708, b[f]) : H(y(e, 5), d ^ n ^ g, l, 3395469782, b[f]), l = g, g = n, n = y(d, 30), d = e, e = p;
+        3] ^ b[f - 8] ^ b[f - 14] ^ b[f - 16], 1), p = 20 > f ? H(y(e, 5), d & n ^ ~d & g, l, 1518500249, b[f]) : 40 > f ? H(y(e, 5), d ^ n ^ g, l, 1859775393, b[f]) : 60 > f ? H(y(e, 5), U(d, n, g), l, 2400959708, b[f]) : H(y(e, 5), d ^ n ^ g, l, 3395469782, b[f]), l = g, g = n, n = y(d, 30), d = e, e = p;
         a[0] = G(e, a[0]);
         a[1] = G(d, a[1]);
         a[2] = G(n, a[2]);
@@ -648,7 +650,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
     }
 
     function L(c,
-        a, k) {
+               a, k) {
         var e, h, n, g, l, p, f, m, q, u, r, t, v, w, y, A, z, x, F, B, C, D, E = [],
             J;
         if ("SHA-224" === k || "SHA-256" === k) u = 64, t = 1, D = Number, v = G, w = la, y = H, A = ha, z = ja, x = da, F = fa, C = U, B = aa, J = d;
@@ -663,7 +665,7 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         p = a[6];
         f = a[7];
         for (r = 0; r < u; r += 1) 16 > r ? (q = r * t, m = c.length <= q ? 0 : c[q], q = c.length <= q + 1 ? 0 : c[q + 1], E[r] = new D(m, q)) : E[r] = w(z(E[r - 2]), E[r - 7], A(E[r - 15]), E[r -
-            16]), m = y(f, F(g), B(g, l, p), J[r], E[r]), q = v(x(k), C(k, e, h)), f = p, p = l, l = g, g = v(n, m), n = h, h = e, e = k, k = v(m, q);
+        16]), m = y(f, F(g), B(g, l, p), J[r], E[r]), q = v(x(k), C(k, e, h)), f = p, p = l, l = g, g = v(n, m), n = h, h = e, e = k, k = v(m, q);
         a[0] = v(k, a[0]);
         a[1] = v(e, a[1]);
         a[2] = v(h, a[2]);
@@ -702,19 +704,20 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
         }
         return a
     }
+
     var d, V, W, X;
     d = [1116352408, 1899447441, 3049323471, 3921009573, 961987163, 1508970993, 2453635748, 2870763221, 3624381080, 310598401, 607225278,
         1426881987, 1925078388, 2162078206, 2614888103, 3248222580, 3835390401, 4022224774, 264347078, 604807628, 770255983, 1249150122, 1555081692, 1996064986, 2554220882, 2821834349, 2952996808, 3210313671, 3336571891, 3584528711, 113926993, 338241895, 666307205, 773529912, 1294757372, 1396182291, 1695183700, 1986661051, 2177026350, 2456956037, 2730485921, 2820302411, 3259730800, 3345764771, 3516065817, 3600352804, 4094571909, 275423344, 430227734, 506948616, 659060556, 883997877, 958139571, 1322822218, 1537002063, 1747873779, 1955562222, 2024104815,
         2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298
     ];
     V = [new b(d[0], 3609767458), new b(d[1], 602891725), new b(d[2], 3964484399), new b(d[3], 2173295548), new b(d[4], 4081628472), new b(d[5], 3053834265), new b(d[6], 2937671579), new b(d[7], 3664609560), new b(d[8], 2734883394), new b(d[9], 1164996542), new b(d[10], 1323610764), new b(d[11], 3590304994), new b(d[12], 4068182383), new b(d[13], 991336113), new b(d[14], 633803317), new b(d[15], 3479774868), new b(d[16], 2666613458), new b(d[17], 944711139), new b(d[18], 2341262773),
-    new b(d[19], 2007800933), new b(d[20], 1495990901), new b(d[21], 1856431235), new b(d[22], 3175218132), new b(d[23], 2198950837), new b(d[24], 3999719339), new b(d[25], 766784016), new b(d[26], 2566594879), new b(d[27], 3203337956), new b(d[28], 1034457026), new b(d[29], 2466948901), new b(d[30], 3758326383), new b(d[31], 168717936), new b(d[32], 1188179964), new b(d[33], 1546045734), new b(d[34], 1522805485), new b(d[35], 2643833823), new b(d[36], 2343527390), new b(d[37], 1014477480), new b(d[38], 1206759142), new b(d[39], 344077627),
-    new b(d[40], 1290863460), new b(d[41], 3158454273), new b(d[42], 3505952657), new b(d[43], 106217008), new b(d[44], 3606008344), new b(d[45], 1432725776), new b(d[46], 1467031594), new b(d[47], 851169720), new b(d[48], 3100823752), new b(d[49], 1363258195), new b(d[50], 3750685593), new b(d[51], 3785050280), new b(d[52], 3318307427), new b(d[53], 3812723403), new b(d[54], 2003034995), new b(d[55], 3602036899), new b(d[56], 1575990012), new b(d[57], 1125592928), new b(d[58], 2716904306), new b(d[59], 442776044), new b(d[60], 593698344), new b(d[61],
-        3733110249), new b(d[62], 2999351573), new b(d[63], 3815920427), new b(3391569614, 3928383900), new b(3515267271, 566280711), new b(3940187606, 3454069534), new b(4118630271, 4000239992), new b(116418474, 1914138554), new b(174292421, 2731055270), new b(289380356, 3203993006), new b(460393269, 320620315), new b(685471733, 587496836), new b(852142971, 1086792851), new b(1017036298, 365543100), new b(1126000580, 2618297676), new b(1288033470, 3409855158), new b(1501505948, 4234509866), new b(1607167915, 987167468), new b(1816402316,
+        new b(d[19], 2007800933), new b(d[20], 1495990901), new b(d[21], 1856431235), new b(d[22], 3175218132), new b(d[23], 2198950837), new b(d[24], 3999719339), new b(d[25], 766784016), new b(d[26], 2566594879), new b(d[27], 3203337956), new b(d[28], 1034457026), new b(d[29], 2466948901), new b(d[30], 3758326383), new b(d[31], 168717936), new b(d[32], 1188179964), new b(d[33], 1546045734), new b(d[34], 1522805485), new b(d[35], 2643833823), new b(d[36], 2343527390), new b(d[37], 1014477480), new b(d[38], 1206759142), new b(d[39], 344077627),
+        new b(d[40], 1290863460), new b(d[41], 3158454273), new b(d[42], 3505952657), new b(d[43], 106217008), new b(d[44], 3606008344), new b(d[45], 1432725776), new b(d[46], 1467031594), new b(d[47], 851169720), new b(d[48], 3100823752), new b(d[49], 1363258195), new b(d[50], 3750685593), new b(d[51], 3785050280), new b(d[52], 3318307427), new b(d[53], 3812723403), new b(d[54], 2003034995), new b(d[55], 3602036899), new b(d[56], 1575990012), new b(d[57], 1125592928), new b(d[58], 2716904306), new b(d[59], 442776044), new b(d[60], 593698344), new b(d[61],
+            3733110249), new b(d[62], 2999351573), new b(d[63], 3815920427), new b(3391569614, 3928383900), new b(3515267271, 566280711), new b(3940187606, 3454069534), new b(4118630271, 4000239992), new b(116418474, 1914138554), new b(174292421, 2731055270), new b(289380356, 3203993006), new b(460393269, 320620315), new b(685471733, 587496836), new b(852142971, 1086792851), new b(1017036298, 365543100), new b(1126000580, 2618297676), new b(1288033470, 3409855158), new b(1501505948, 4234509866), new b(1607167915, 987167468), new b(1816402316,
             1246189591)
     ];
     X = [new b(0, 1), new b(0, 32898), new b(2147483648, 32906), new b(2147483648, 2147516416), new b(0, 32907), new b(0, 2147483649), new b(2147483648, 2147516545), new b(2147483648, 32777), new b(0, 138), new b(0, 136), new b(0, 2147516425), new b(0, 2147483658), new b(0, 2147516555), new b(2147483648, 139), new b(2147483648, 32905), new b(2147483648, 32771), new b(2147483648, 32770), new b(2147483648, 128), new b(0, 32778), new b(2147483648, 2147483658), new b(2147483648, 2147516545), new b(2147483648, 32896), new b(0, 2147483649),
-    new b(2147483648, 2147516424)
+        new b(2147483648, 2147516424)
     ];
     W = [
         [0, 36, 3, 41, 18],
@@ -729,15 +732,14 @@ https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper
 })(this);
 
 
-
 /*
 优化说明
     1、改成中文 "确定"、"取消" 按钮。
     2、select 新增了 textContents 数组。
-    3、新增了skin: 'tab'换页切换菜单样式
-    4、更新部分翻译
-    5、优化字体显示效果
-    6、优化同一行内CSS样式
+	3、新增了skin: 'tab'换页切换菜单样式
+	4、更新部分翻译
+	5、优化字体显示效果
+	6、优化同一行内CSS样式
 */
 
 
@@ -755,11 +757,16 @@ function GM_configInit(config, args) {
     // Initialize instance variables
     if (typeof config.fields == "undefined") {
         config.fields = {};
-        config.onInit = config.onInit || function () { };
-        config.onOpen = config.onOpen || function () { };
-        config.onSave = config.onSave || function () { };
-        config.onClose = config.onClose || function () { };
-        config.onReset = config.onReset || function () { };
+        config.onInit = config.onInit || function () {
+        };
+        config.onOpen = config.onOpen || function () {
+        };
+        config.onSave = config.onSave || function () {
+        };
+        config.onClose = config.onClose || function () {
+        };
+        config.onReset = config.onReset || function () {
+        };
         config.isOpen = false;
         config.title = '用户脚本设置';
         config.css = {
@@ -1012,8 +1019,8 @@ GM_configStruct.prototype = {
 
             // Add save and close buttons
             bodyWrapper.appendChild(create('div', {
-                id: configId + '_buttons_holder'
-            },
+                    id: configId + '_buttons_holder'
+                },
 
                 create('button', {
                     id: configId + '_saveBtn',
@@ -1037,8 +1044,8 @@ GM_configStruct.prototype = {
                 }),
 
                 create('div', {
-                    className: 'reset_holder block'
-                },
+                        className: 'reset_holder block'
+                    },
 
                     // Reset link
                     create('a', {
@@ -1342,9 +1349,9 @@ GM_configStruct.prototype = {
     GM_configStruct.prototype.log = window.console ?
         console.log : (isGM && typeof GM_log != 'undefined' ?
             GM_log : (window.opera ?
-                opera.postError : function () {
-                    /* no logging */
-                }
+                    opera.postError : function () {
+                        /* no logging */
+                    }
             ));
 })();
 
@@ -1440,10 +1447,10 @@ GM_configField.prototype = {
         }
 
         var retNode = create('div', {
-            className: 'config_var',
-            id: configId + '_' + id + '_var',
-            title: field.title || ''
-        }),
+                className: 'config_var',
+                id: configId + '_' + id + '_var',
+                title: field.title || ''
+            }),
             firstProp;
 
         // Retrieve the first prop
@@ -1501,7 +1508,7 @@ GM_configField.prototype = {
                     }));
 
                     var radLabelPos = labelPos &&
-                        (labelPos == 'left' || labelPos == 'right') ?
+                    (labelPos == 'left' || labelPos == 'right') ?
                         labelPos : firstProp == 'options' ? 'left' : 'right';
 
                     addLabel(radLabelPos, radLabel, wrap, rad);
@@ -1685,17 +1692,18 @@ GM_configField.prototype = {
 var GM_config = new GM_configStruct();
 
 /*waitForKeyElements*/
+
 /*--- waitForKeyElements(): A utility function, for Greasemonkey scripts,
  that detects and handles AJAXed content.
-  
+
  Usage example:
  waitForKeyElements ("div.comments", commentCallbackFunction);
-  
+
  //--- Page-specific function to do what we want when the node is found.
  function commentCallbackFunction (jNode) {
      jNode.text ("This comment changed by waitForKeyElements().");
  }
-  
+
  IMPORTANT: This function requires your script to have loaded jQuery.
  */
 
@@ -1763,12 +1771,12 @@ function waitForKeyElements(
         //--- Set a timer, if needed.
         if (!timeControl) {
             timeControl = setInterval(function () {
-                waitForKeyElements(selectorTxt,
-                    actionFunction,
-                    bWaitOnce,
-                    iframeSelector
-                );
-            },
+                    waitForKeyElements(selectorTxt,
+                        actionFunction,
+                        bWaitOnce,
+                        iframeSelector
+                    );
+                },
                 300
             );
             controlObj[controlKey] = timeControl;
@@ -1778,62 +1786,61 @@ function waitForKeyElements(
 }
 
 
-
 (function () {
     'use strict';
 
     //types to change
-    //类型匹配: 
+    //类型匹配:
     //'c':['a','b']  代表file.a,  file.b中变成file.a.c,  file.b.c
-    const FileTypes={
-        'tiff':['jpg','jpeg','png','gif','bmp','webp','tiff','tif','ico','svg','svgz','raw','cr2','crw','dcr','dng','erf','fff','gpr','iiq','k25','kdc','mdc','mef','mos','mrw','nef','nrw','orf','pef','ptx','pxn','r3d','raf','raw','rw2','rwl','rwz','sr2','srf','srw','x3f','xbm','xif','xpm','xwd'],
-        'iso':['mp4','webm','ogg','ogv','avi','mov','wmv','flv','mkv','mpeg','mpg','m4v','3gp','3g2','ts','m2v','m2ts','rmvb'],
-        'txt':['txt']
+    const FileTypes = {
+        'tiff': ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'ico', 'svg', 'svgz', 'raw', 'cr2', 'crw', 'dcr', 'dng', 'erf', 'fff', 'gpr', 'iiq', 'k25', 'kdc', 'mdc', 'mef', 'mos', 'mrw', 'nef', 'nrw', 'orf', 'pef', 'ptx', 'pxn', 'r3d', 'raf', 'raw', 'rw2', 'rwl', 'rwz', 'sr2', 'srf', 'srw', 'x3f', 'xbm', 'xif', 'xpm', 'xwd'],
+        'iso': ['mp4', 'webm', 'ogg', 'ogv', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'mpeg', 'mpg', 'm4v', '3gp', '3g2', 'ts', 'm2v', 'm2ts', 'rmvb'],
+        'txt': ['txt']
     }
-   
 
-    function changeType(originType){
-        let extension=originType.toLowerCase();
-        let changedType='';
-        for(let type in FileTypes){
-            if(FileTypes[type].includes(extension)){
-                changedType=type;
+
+    function changeType(originType) {
+        let extension = originType.toLowerCase();
+        let changedType = '';
+        for (let type in FileTypes) {
+            if (FileTypes[type].includes(extension)) {
+                changedType = type;
                 break;
             }
         }
-        //if(changedType==''){
-        //    changedType=`${originType}`;
-        //}
-        
+        if (changedType == '') {
+            changedType = emojiUtils.toArray(changedType).map(c => c + '蠔').join("").slice(0, -1);
+            ;
+        }
+
         return changedType;
     }
 
-    function changeNameBack(fileName){
-        let name=fileName.toLowerCase();
-        let originName=fileName;
+    function changeNameBack(fileName) {
+        let name = fileName.toLowerCase();
+        let originName = fileName;
         console.log(`Name: ${fileName}`)
-        for(let type in FileTypes){
-            for(let ext of FileTypes[type]){
-                if(name.endsWith(`.${ext}.${type}`)){
+        for (let type in FileTypes) {
+            for (let ext of FileTypes[type]) {
+                if (name.endsWith(`.${ext}.${type}`)) {
                     console.log(`addedType:${type}`)
                     console.log(type.length)
-                    originName=originName.slice(0,-(type.length+1));
+                    originName = originName.slice(0, -(type.length + 1));
                     console.log(`originName: ${originName}`)
                     return originName;
                 }
-            } 
+            }
         }
         console.log(`originName: ${originName}`)
         return originName;
     }
 
 
-
     //版本信息
     const TIPS = {
-        CurrentVersion: "143.2022.0818.2",
-        LastUpdateDate: "2022.08.18",
-        VersionTips: "115转存助手ui优化版 v3.8.1",
+        CurrentVersion: "143.2022.0616.1",
+        LastUpdateDate: "2022.06.16",
+        VersionTips: "115转存助手ui优化版 v3.6",
         UpdateUrl: "https://github.com/Nerver4Ever/SevenSha1UIAdvancedHelper",
         Sha1FileInputDetails: "",
     };
@@ -1851,12 +1858,12 @@ function waitForKeyElements(
         from {
             filter: hue-rotate(0);
         }
-    
+
         to {
             filter: hue-rotate(360deg);
         }
     }
-    
+
     .rainbow-text {
         display: inline-block;
         color: red;
@@ -1896,13 +1903,13 @@ function waitForKeyElements(
           border: none;
           cursor: pointer;
         }
-        
+
         /* The container <div> - needed to position the dropdown content */
         .my115Dropdown {
           position: relative;
           display: inline-block;
         }
-        
+
         /* Dropdown Content (Hidden by Default) */
         .my115Dropdown-content {
           display: none;
@@ -1913,7 +1920,7 @@ function waitForKeyElements(
           z-index: 1;
           margin-top: 32px;
         }
-        
+
         /* Links inside the dropdown */
         .my115Dropdown-content a {
           color: black;
@@ -1923,18 +1930,18 @@ function waitForKeyElements(
           cursor: pointer;
           margin:4px;
         }
-        
+
         /* Change color of dropdown links on hover */
         .my115Dropdown-content a:hover{
             background-color: #2777F8;
             color:white;
         }
-        
+
         /* Show the dropdown menu on hover */
         .my115Dropdown:hover .my115Dropdown-content {
           display: block;
         }
-        
+
         /* Change the background color of the dropdown button when the dropdown content is shown */
         .my115Dropdown:hover .my115Dropbtn {
           background-color: #3e8e41;
@@ -1955,7 +1962,6 @@ function waitForKeyElements(
         console.log("脚本与环境信息：（如果报bug，请附带上如下信息）")
         let env = getEnviromentInfo();
         console.log(env);
-
 
 
         var windowCss = '#Cfg4ne .nav-tabs {margin: 20 2} #Cfg4ne .config_var textarea{width: 310px; height: 50px;} #Cfg4ne .inline {padding-bottom:0px;} #Cfg4ne .config_header a:hover {color:#1e90ff;} #Cfg4ne .config_var {margin-left: 6%;margin-right: 6%;} #Cfg4ne input[type="checkbox"] {margin: 3px 3px 3px 0px;} #Cfg4ne input[type="text"] {width: 60px;} #Cfg4ne {background-color: lightgray;} #Cfg4ne .reset_holder {float: left; position: relative; bottom: -1em;} #Cfg4ne .saveclose_buttons {margin: .7em;} #Cfg4ne .section_desc {font-size: 10pt;}';
@@ -2010,12 +2016,12 @@ function waitForKeyElements(
                     type: 'checkbox',
                     default: true,
                 },
-                //advancedRename: {
-                //    label: '在目录的悬浮工具条处显示“遍历文件夹”选项',
-                //    labelPos: 'right',
-                //    type: 'checkbox',
-                //    default: false,
-                //},
+                advancedRename: {
+                    label: '在目录的悬浮工具条处显示“去除分隔符”选项',
+                    labelPos: 'right',
+                    type: 'checkbox',
+                    default: false,
+                },
                 autoUseSeparator: {
                     label: '自动给文件名添加分隔符进行上传，以防文件名违规',
                     labelPos: 'right',
@@ -2134,7 +2140,7 @@ function waitForKeyElements(
     window.cookie = document.cookie
 
 
-    //todo:添加的功能入口 
+    //todo:添加的功能入口
     //列表模式下，项目悬工具条
     waitForKeyElements("div.file-opr", AddShareSHA1Btn);
     //添加任务的弹窗
@@ -2151,16 +2157,6 @@ function waitForKeyElements(
     function HandleUidDiv(node) {
         node.hide();
         console.log("set uiddiv");
-    }
-
-    waitForKeyElements('.list-contents > ul > li[ico="tiff"]', changeImageExtensionInHtml);
-
-    function changeImageExtensionInHtml(node){
-        let title=$(node).attr("title");
-        //$(node).attr("title",`${title}.pic`);
-        let $a= $(node).find(`a[title="${title}"]`)
-        $a.attr("title",`${title}.pic`);
-        //(function(){ $(".list-contents > ul > li").each(function(i, item) {if($(this).attr('title').substr(-1) == '.'){$(this).attr('iv',1);}});})
     }
 
     //#region 20201230新的提取api相关
@@ -2333,17 +2329,27 @@ function waitForKeyElements(
     };
 
     function GetSig(userid, fileid, target, userkey) {
-        var sha1, tmp;
-        sha1 = new jsSHA('SHA-1', 'TEXT');
-        sha1.update("" + userid + fileid + fileid + target + "0");
-        tmp = sha1.getHash('HEX');
-        sha1 = new jsSHA('SHA-1', 'TEXT');
-        sha1.update("" + userkey + tmp + "000000");
-        return sha1.getHash('HEX', {
-            outputUpper: true
-        });
+        var tmp = sha1("" + userid +fileid+fileid+ target + "0",false);
+        return sha1("" + userkey + tmp + "000000",true);
     }
-
+    function GetToken(preid,userid,time, fileid, size,appversion) {
+        var mima = "Qclm8MGWUv59TnrR0XPg" +fileid +size+ preid + userid + time  + md5(userid) +appversion;
+        var mimamd5 = md5(mima);
+        return mimamd5;
+    }
+    function sha1(str,upper){
+        var sha1;
+        sha1 = new jsSHA('SHA-1', 'TEXT');
+        sha1.update(""+str);
+        var hex=sha1.getHash('HEX', {
+            outputUpper: upper
+        });
+        return hex;
+    }
+    function toUtf(str){
+        var encoder= new TextEncoder("utf8");
+        return encoder.encode(str);
+    }
 
 
     function download(filename, content, contentType) {
@@ -2378,8 +2384,6 @@ function waitForKeyElements(
     }
 
 
-
-
     //#endregion
 
     function hereDoc(f) {
@@ -2407,7 +2411,6 @@ function waitForKeyElements(
         FILEDOWNLOAD: 12,
         MSGERROR: 13,
         JSINFO: 14,
-        FATALERRORUPLOAD: 15
     };
 
     function createMessage(messageType, msg, id) {
@@ -2578,23 +2581,9 @@ function waitForKeyElements(
                             });
 
 
-
                         }
                     });
-                } else if (message.messageType == MessageType.FATALERRORUPLOAD) {
-                    $itemContent.html(message.msg);
-                    Swal.getTitle().textContent = "上传遇到致命错误，已主动停止！";
-                    Swal.getCancelButton().style.display = "none";
-                    Swal.getDenyButton().style.display = "block";
-                    Swal.getDenyButton().addEventListener('click', e => {
-                        console.log("DenyButton click");
-                        console.log(message);
-                        window.location.href = "https://115.com/?cid=" + message.targetID + "&offset=0&tab=&mode=wangpan";
-                    });
-                    Swal.getFooter().style.display = "none";
-                    Swal.hideLoading();
-                }
-                else if (message.messageType == MessageType.END4UPLOAD) {
+                } else if (message.messageType == MessageType.END4UPLOAD) {
                     $itemContent.html(message.msg);
                     Swal.getTitle().textContent = "操作完成！";
                     Swal.getCancelButton().style.display = "none";
@@ -2681,10 +2670,6 @@ function waitForKeyElements(
             })
         });
     }
-
-
-
-
 
 
     function delay(ms) {
@@ -2784,7 +2769,7 @@ function waitForKeyElements(
 
             folderProcessCallback(pageIndex);
             var result = null;
-            //1200数量，不同的api；这么写减少发包  
+            //1200数量，不同的api；这么写减少发包
             if (first) {
                 result = await getDirectChildItemsByOffset(cid, index);
                 console.log(`first >1200 :${result.state},${result.count}`);
@@ -2928,28 +2913,6 @@ function waitForKeyElements(
             await delay(200);
         }
 
-    }
-
-    async function renameFile(id, name) {
-        let data = {
-            fid: id,
-            file_name: name
-        };
-        let renameUrl = "https://webapi.115.com/files/edit";
-        const result = await $.ajax({
-            type: 'POST',
-            url: renameUrl,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                //'Origin': 'https://115.com'
-            },
-            dataType: "json",
-            xhrFields: {
-                withCredentials: true
-            },
-            data: data
-        });
-        return result;
     }
 
     //批量重命名 fileArray  [{id:id,name:ddd}]
@@ -3209,7 +3172,8 @@ function waitForKeyElements(
         };
     })();
 
-    function downloadAFile(fileItem, progressCallback = function (text) { }) {
+    function downloadAFile(fileItem, progressCallback = function (text) {
+    }) {
         console.log("downloadAFile")
         console.log(fileItem)
         const r = new Promise((resolve, reject) => {
@@ -3315,13 +3279,9 @@ function waitForKeyElements(
         return r;
     }
 
-    function replaceDot(name) {
-        return name.replace(/\./g, "_");
-        return name;
-    }
     //windows平台上限制的字符：/\|":*?<> 其他平台比windows宽泛一些
     function repalceValidatedName(name) {
-        let newName= name.replace(/</g, '[')
+        return name.replace(/</g, '[')
             .replace(/>/g, ']')
             .replace(/\|/g, '_')
             .replace(/:/g, '_')
@@ -3330,21 +3290,17 @@ function waitForKeyElements(
             .replace(/\*/g, '_')
             .replace(/"/g, '\'')
             .replace(/\?/g, '_');
-
-        if(newName.startsWith(".")){
-            newName=newName.slice(1);
-        }
-        return newName;
     }
+
     //格式化sha1 链接
     //return type: {state:succeed,msg:""}
     // false:msg->出错信息
-    //true: msg->sha1链接 
+    //true: msg->sha1链接
     function convertToSha1Link(fileItem, isSimpleFormat) {
         var succeed = false;
         var msg = "格式生成失败!";
         //3.8
-        fileItem.name=changeNameBack(fileItem.name);
+        fileItem.name = changeNameBack(fileItem.name);
         if (fileItem.name && fileItem.size && fileItem.sha1 && fileItem.preid) {
             var sha1Link = "115://" + repalceValidatedName(fileItem.name) + "|" + fileItem.size + "|" + fileItem.sha1 + "|" + fileItem.preid;
             if (!isSimpleFormat) {
@@ -3428,15 +3384,14 @@ function waitForKeyElements(
                 data: postData,
                 responseType: 'json',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    //'Origin': 'https://115.com'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'User-Agent': 'Mozilla/5.0;  Mac  OS  X/10.15.7;  115Desktop/2.0.1.7'
                 },
                 onload: function (response) {
                     let data = {
                         state: false,
                         error: "",
-                        pickCode: "",
-                        fatalError: false
+                        pickCode: ""
                     };
                     if (response.status === 200 && response.response.status === 2) {
                         data.state = true;
@@ -3445,7 +3400,6 @@ function waitForKeyElements(
                         console.error(response);
                         let error = "或许sha1链接不匹配(?)";
                         if (response.status === 405) {
-                            data.fatalError = true;
                             error = "频繁请求，被115限制 ([!]立即停止，尝试停止操作半小时或者重新登录)：" + response.statusText;
                         } else if (response.response && response.response.message) error = response.response.message;
                         else if (response.response && response.response.statusmsg) error = "可能参数不正确(?)：" + response.response.statusmsg;
@@ -3462,14 +3416,21 @@ function waitForKeyElements(
     function uploadFile(targetFolder, fileItem, uploadInfo) {
 
         let fCid = `U_1_${targetFolder}`;
-        let appVersion = "25.2.0";
+        let appVersion = "2.0.1.7";
+        let time =  Date.parse(new Date());
         let urlData = UrlData({
             isp: 0,
             appid: 0,
             appversion: appVersion,
             format: 'json',
-            sig: GetSig(uploadInfo.user_id, fileItem.sha1, fCid, uploadInfo.userkey)
+            t: time,
+            sig: GetSig(uploadInfo.user_id, fileItem.sha1, fCid, uploadInfo.userkey),
+            token:  GetToken(fileItem.preid,uploadInfo.user_id,
+                time, fileItem.sha1, fileItem.size,appVersion),
+            rt:0,
+            topupload:0
         });
+        console.log(urlData.token)
 
         console.log("postData")
         console.log("fileItem.formatedName")
@@ -3483,7 +3444,6 @@ function waitForKeyElements(
             exif: '',
             target: fCid,
             userid: uploadInfo.user_id
-
         });
 
         console.log(postData)
@@ -3495,7 +3455,6 @@ function waitForKeyElements(
                 fileItem.state = t.state;
                 fileItem.pickCode = t.pickCode;
                 resole({
-                    fatalError: t.fatalError,
                     state: t.state,
                     error: t.error,
                     fileItem: fileItem
@@ -3518,13 +3477,13 @@ function waitForKeyElements(
             }),
             responseType: 'json',
             onload: function (response) {
-                if (response.status === 200) { }
+                if (response.status === 200) {
+                }
             }
         });
     }
 
     //#endregion
-
 
 
     async function updateParentID(cid, cname, thisLevel, maxLevel, items, sleepTime, createFolderCallback) {
@@ -3563,7 +3522,7 @@ function waitForKeyElements(
 
             if (r.state) {
                 await updateParentID(r.cid, folderName, thisLevel + 1, maxLevel, files, createFolderCallback);
-            } else { //ui 目录创建失败  
+            } else { //ui 目录创建失败
                 //todo: ！！！尚未解决这个
                 console.error(`updateParentID  如果出现这个，说明重复名字的文件夹也太太太多了`);
             }
@@ -3618,6 +3577,7 @@ function waitForKeyElements(
     function reverseString(str) {
         return str.split("").reverse().join("");
     }
+
     //解析inline text sha1 links,并根据配置设置分隔符;返回FileArray
     function parseSha1LinksToFileArray(text, nameSeparator, errorCallback) {
         let textLines = text.split(/\r?\n/);
@@ -3629,33 +3589,15 @@ function waitForKeyElements(
             let r = convertFromSha1Link(fLine);
             if (r.state) {
                 let nameStrings = r.fileItem.name.split(".");
-                let name= r.fileItem.name;
-                if(nameStrings.length>1){
-                    let extension = nameStrings.pop();
-                    r.fileItem.extension = extension;
-                    r.fileItem.formatedExtension=changeType(extension);
-                    console.log(`formatedExtension:${r.fileItem.formatedExtension}`)
-                }
-                else{
-                    name = r.fileItem.name;
-                }
-                //let extension = nameStrings.pop();
-                //r.fileItem.extension = extension;
-                //let formatedExtension=reverseString(extension);
+                let extension = nameStrings.pop();
+                r.fileItem.extension = extension;
+                let formatedExtension = extension;
                 //根据配置重新设置文件名
                 if (nameSeparator) {
                     //使用emoutils.js库来分割，带有emoji的文件名
-                    //let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
-                    //r.fileItem.formatedName = fileName + "." + formatedExtension;
-                    if(r.fileItem.formatedExtension&&r.fileItem.formatedExtension!=""){
-                        r.fileItem.formatedName=emojiUtils.toArray(r.fileItem.name).map(c => c+nameSeparator).join("").slice(0, -1)+"."+r.fileItem.formatedExtension;
-                    }else if(r.fileItem.extension){
-                        r.fileItem.formatedName=emojiUtils.toArray(name).map(c => c+nameSeparator).join("").slice(0, -1)+"."+r.fileItem.extension;
-                    }
-                    else{
-                        r.fileItem.formatedName=emojiUtils.toArray(name).map(c => c+nameSeparator).join("").slice(0, -1);
-                    }
-                    console.log(`formatedName:${r.fileItem.formatedName}`)
+                    let fileName = emojiUtils.toArray(nameStrings.join('.')).map(c => c + nameSeparator).join("").slice(0, -1);
+                    r.fileItem.formatedName = fileName + "." + formatedExtension;
+                    //r.fileItem.formatedName=emojiUtils.toArray(r.fileItem.name).map(c => c + nameSeparator).join("").slice(0, -1);
                 } else {
                     r.fileItem.formatedName = r.fileItem.name;
                 }
@@ -3725,7 +3667,6 @@ function waitForKeyElements(
         console.log('uploadFileWithTimeOut')
         let to = delay(timeOut).then(t => {
             return {
-                fatalError: false,
                 state: false,
                 error: `等待上传结果超时，此乃警告！成功与否，看最后统计结果！`,
                 fileItem: file
@@ -3737,7 +3678,6 @@ function waitForKeyElements(
     }
 
 
-
     async function processUpload(allFiles, workingNumber, sleepTime, resultCallback) {
         let fileArray = allFiles.filter(q => !q.state);
         let index = 1;
@@ -3747,14 +3687,10 @@ function waitForKeyElements(
         let uploadInfo = await getUploadInfo();
         console.log("uploadInfo")
         let msg;
-        let fatalError = false;
         for (let file of fileArray) {
             if (getTaskCancelFlag()) {
                 console.log("转存取消");
                 //postSha1Messgae(createMessage(MessageType.PROCESSING, "已取消，正在等待进行中的任务结束..."));
-                break;
-            }
-            if (fatalError) {
                 break;
             }
             console.log(file);
@@ -3768,26 +3704,22 @@ function waitForKeyElements(
                     let uploadError = `【 <b>${t.fileItem.name}</b> 】： ${t.error}`;
                     resultCallback && resultCallback({
                         state: false,
-                        msg: uploadError
+                        msg: uploadError,
+                        error: t.error
                     });
                     msg = `<div align="right"><b>${completed}</b> | <b>${fileLength}</b></div><hr>${uploadError}`;
-
-                    if (t.fatalError) {
-                        console.log("fatalError");
-                        fatalError = true;
-                    }
-
                 }
                 resultCallback && resultCallback({
                     state: true,
-                    msg: msg
+                    msg: msg,
+                    error: null
                 });
             });
 
             promisArray.push(r);
 
-            if (index % workingNumber == 0) {
-                await delay(sleepTime * 1.5);
+            if (index % 4 == 0) {
+                await delay(1000);
             }
 
             if (index % 128 == 0) {
@@ -3808,7 +3740,7 @@ function waitForKeyElements(
         await delay(500);
         await Promise.all(promisArray);
 
-        return fatalError;
+        return fileArray;
     }
 
 
@@ -3824,7 +3756,7 @@ function waitForKeyElements(
 
         resultCallback({
             state: true,
-            msg: "正在等待重命名...如果文件较多，请等待"
+            msg: "正在等待重命名...如果文件较多，请等待；或者停止，等以后手动操作去除分隔符。"
         });
 
         console.log(history.length);
@@ -3853,55 +3785,12 @@ function waitForKeyElements(
                 id: f.id,
                 //fix
                 //name: name.split(separator).join("")+"."+reverseString(ext)
-                name: f.name
+                name: f.formatedName.split(separator).join("")
             };
-
-            if(f.formatedExtension){
-                fo.name=`${f.name}.${f.formatedExtension}`;
-            }
-
             return fo;
         });
         console.log(selectedFiles)
-
-        /*
-        let renameIndex=1;
-        let renameCount=selectedFiles.length;
-        for (const sendFile of selectedFiles) {
-            console.log(sendFile);
-            let t=await renameFile(sendFile.id,sendFile.name);
-            console.log(t);
-            if(t.state==true){
-                resultCallback && resultCallback({
-                    state: true,
-                    msg: `${renameIndex}|${renameCount}<br/>重命名${sendFile.name}成功!`
-                });
-            }
-            else{
-                resultCallback && resultCallback({
-                    state: false,
-                    msg: `${renameIndex}|${renameCount}<br/>重命名${sendFile.name}失败!`
-                });
-            }
-            await delay(300);
-            renameIndex++;
-
-            if (renameIndex % 128 == 0) {
-                let seconds = 3;
-                for (let i = 0; i < seconds; i++) {
-                    resultCallback && resultCallback({
-                        state: true,
-                        msg: `防止115服务器限制，暂停发包。<br><br>${seconds - i}秒后继续....`
-                    });
-                    await delay(1000);
-                }
-            }
-        }
-        */
-           
-        
-         
-let i, j, temporary, chunk = 115;
+        let i, j, temporary, chunk = 115;
         for (i = 0, j = selectedFiles.length; i < j; i += chunk) {
             temporary = selectedFiles.slice(i, i + chunk);
             resultCallback && resultCallback({
@@ -3926,11 +3815,8 @@ let i, j, temporary, chunk = 115;
             }
             await delay(sleepTime);
         }
-         
-
 
     }
-
 
 
     async function processRename(targetFolderCid, separator, sleepTime, resultCallback) {
@@ -3949,7 +3835,7 @@ let i, j, temporary, chunk = 115;
             }
         });
 
-        /* 20220816暂时下线手动去除分隔符，改为遍历文件夹
+
         let selectedFiles = onlineFiles.filter(f => f.name.search(separator) != -1).map(f => {
             //let lastIndex=f.name.lastIndexOf(".");
             //let name=f.name.substring(0,lastIndex);
@@ -3988,7 +3874,6 @@ let i, j, temporary, chunk = 115;
             }
             await delay(sleepTime);
         }
-        */
 
     }
 
@@ -4096,57 +3981,78 @@ let i, j, temporary, chunk = 115;
         window.parent.document.myData = files;
         postSha1Messgae(createMessage(MessageType.SHOWCANCEl));
         console.log(files.length);
-        //文件上传
-        let hasFatalError = await processUpload(files, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
-            if (result.state === true) {
-                postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
-            } else {
-                postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
-            }
-        });
-
-        if (hasFatalError) {
-            let msg = `频繁请求，被115限制 (尝试停止操作半小时或者重新登录)<br>\
-            获取最新版，或者遇到问题去此反馈，感谢 !点击-> <a href="${TIPS.UpdateUrl}" target="_blank">${TIPS.VersionTips}</a>`;
-            postSha1Messgae(createMessage(MessageType.FATALERRORUPLOAD, msg, newTargetCid));
-            return;
-        }
-
-
-
-
         let isTaskCanceled = getTaskCancelFlag();
 
-        postSha1Messgae(createMessage(MessageType.HIDECANCEL));
-
-        //根据配置，重命名文件
-        if (uploadConfig.itemNameSeparator.needToSeparate &&
-            uploadConfig.itemNameSeparator.needToRemoveSeparator &&
-            uploadConfig.itemNameSeparator.separator &&
-            !isTaskCanceled) {
-            postSha1Messgae(createMessage(MessageType.PROCESSING, "开始获取文件，并自动重命名..."));
-            await delay(folderSleepTime);
-            console.log(files)
-            await processRenameByUsingHistory(files, uploadConfig.itemNameSeparator.separator, folderSleepTime, result => {
+        async function uploadReentre(uploadFiles) {
+            if (uploadFiles.length == 0) {
+                return uploadFiles;
+            }
+            let hasTimeout = false;
+            //文件上传
+            await processUpload(uploadFiles, uploadConfig.upload.workingNumber, uploadConfig.upload.sleepTime, result => {
                 if (result.state === true) {
                     postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
                 } else {
+                    if (result.error == `等待上传结果超时，此乃警告！成功与否，看最后统计结果！`) {
+                        hasTimeout = true;
+                    }
                     postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
                 }
             });
-            // await processRename(newTargetCid, uploadConfig.itemNameSeparator.separator, folderSleepTime, result => {
-            //     if (result.state === true) {
-            //         postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
-            //     } else {
-            //         postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
-            //     }
-            // });
+            isTaskCanceled = getTaskCancelFlag();
 
-            postSha1Messgae(createMessage(MessageType.PROCESSING, "文件批量去除分隔符（重命名）完成！"));
-            await delay(folderSleepTime * 2);
+            postSha1Messgae(createMessage(MessageType.HIDECANCEL));
+
+            //根据配置，重命名文件
+            if (uploadConfig.itemNameSeparator.needToSeparate &&
+                uploadConfig.itemNameSeparator.needToRemoveSeparator &&
+                uploadConfig.itemNameSeparator.separator &&
+                !isTaskCanceled) {
+                postSha1Messgae(createMessage(MessageType.PROCESSING, "开始获取文件，并自动重命名..."));
+                await delay(folderSleepTime);
+                console.log(uploadFiles)
+                await processRenameByUsingHistory(uploadFiles, uploadConfig.itemNameSeparator.separator, folderSleepTime, result => {
+                    if (result.state === true) {
+                        postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
+                    } else {
+                        postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
+                    }
+                });
+                // await processRename(newTargetCid, uploadConfig.itemNameSeparator.separator, folderSleepTime, result => {
+                //     if (result.state === true) {
+                //         postSha1Messgae(createMessage(MessageType.PROCESSING, result.msg));
+                //     } else {
+                //         postSha1Messgae(createMessage(MessageType.ERROR, result.msg));
+                //     }
+                // });
+
+                postSha1Messgae(createMessage(MessageType.PROCESSING, "文件批量去除分隔符（重命名）完成！"));
+                await delay(folderSleepTime * 2);
+            }
+            var uploadFails = files.filter(q => !q.state);
+            if (hasTimeout === true) {
+                await delay(3000);
+                return await uploadReentre(uploadFails);
+            } else {
+                return uploadFails;
+            }
         }
 
-        var fails = files.filter(q => !q.state);
+
+        var fails1 = await uploadReentre(files);
+        for (let r of fails1) {
+            let nameStrings = r.name.split(".");
+            let name = r.name;
+            if (nameStrings.length > 1) {
+                let extension = nameStrings.pop();
+                r.extension = extension;
+                r.formatedExtension = changeType(extension);
+                console.log(`formatedExtension:${r.formatedExtension}`)
+            }
+            r.formatedName = emojiUtils.toArray(name).map(c => c + nameSeparator).join("").slice(0, -1) + "." + r.formatedExtension;
+        }
+        var fails = await uploadReentre(fails1);
+
         var failText = fails.map(function (p) {
             var r = convertToSha1Link(p, false);
             return r.msg;
@@ -4188,7 +4094,6 @@ let i, j, temporary, chunk = 115;
         postSha1Messgae(createMessage(MessageType.END4UPLOAD, msg, newTargetCid));
 
     }
-
 
 
     function getFileItemPreidWithTimeOut(timeOut, file) {
@@ -4243,6 +4148,7 @@ let i, j, temporary, chunk = 115;
     }
 
     const FILESIZE = 128 * 1024;
+
     async function InnerCreateSha1Links(allFiles, txtName) {
         var msg = "";
         var index = 1;
@@ -4368,7 +4274,6 @@ let i, j, temporary, chunk = 115;
                 }
                 download(file_name, text);
             }
-
 
 
             msg = `
@@ -4545,7 +4450,6 @@ let i, j, temporary, chunk = 115;
         });
 
 
-
         let onlineFile = null;
 
         var file = "";
@@ -4698,9 +4602,7 @@ let i, j, temporary, chunk = 115;
                     UploadFilesBySha1Links(config);
 
 
-
                 }
-
 
 
             });
@@ -4735,7 +4637,7 @@ let i, j, temporary, chunk = 115;
                 let folderIncluded = null;
 
                 for (const li of lis) {
-                
+
                     if(li.className&&li.className.includes("selected"))
                     {
                         li.classList.remove("selected")
@@ -4746,7 +4648,7 @@ let i, j, temporary, chunk = 115;
                         folderIncluded = li;
                     }
                 };
-                
+
                 console.log(folderIncluded)
                 if(folderIncluded){
                     folderIncluded.classList.add("selected");
@@ -4756,7 +4658,7 @@ let i, j, temporary, chunk = 115;
                     ul.insertAdjacentHTML("afterbegin", li);
                 }
 
-                
+
 
                 const em= document.querySelector('em[rel="downFileResult"]');
                 if(em){
@@ -4766,10 +4668,6 @@ let i, j, temporary, chunk = 115;
 
         }
         */
-
-
-
-
 
 
     }
@@ -4797,7 +4695,6 @@ let i, j, temporary, chunk = 115;
     // }
 
 
-
     function AddCeateSha1ButtonInGrid(jNode) {
         //add: v3.4 增加设置是否显示 缩略图模式下获取sha1
         if (!GM_config.get(currentConfig.createItemSha1InThumb)) return;
@@ -4819,13 +4716,13 @@ let i, j, temporary, chunk = 115;
 
 
     function renameInToolTip(element, pItem) {
-        var $btn1 = $('<a><i></i><span>遍历文件夹</span></a>');
+        var $btn1 = $('<a><i></i><span>去除分隔符</span></a>');
         $btn1.prependTo(element);
         $btn1[0].addEventListener('click', async e => {
             let separator = GM_config.get(currentConfig.separator);
             let sleepTime = GM_config.get(currentConfig.createFolderSleepTime);
             postSha1Messgae(createMessage(MessageType.BEGIN4UPLOAD, ""));
-            postSha1Messgae(createMessage(MessageType.PROCESSING, `即将开始遍历 【${pItem.name}】 下所有文件：<br>`));
+            postSha1Messgae(createMessage(MessageType.PROCESSING, `即将开始重命名 【${pItem.name}】 下所有文件：<br><br>去除分隔符：${separator}`));
             await delay(1000);
             await processRename(pItem.id, separator, sleepTime, result => {
                 if (result.state === true) {
@@ -4879,7 +4776,7 @@ let i, j, temporary, chunk = 115;
         jNode[0].style.left = "180px";
         //目录，去除分隔符
         if (pItem.isFolder && GM_config.get(currentConfig.advancedRename)) {
-           // renameInToolTip(jNode[0], pItem);
+            renameInToolTip(jNode[0], pItem);
         }
 
         //add: v3.4 增加设置是否显示 列表模式下获取sha1
@@ -4891,7 +4788,6 @@ let i, j, temporary, chunk = 115;
         if (!pItem.isFolder) {
             usingOnlineFileToUploadInToolTip(jNode[0], pItem);
         }
-
 
 
         //生成json格式
@@ -4988,7 +4884,6 @@ let i, j, temporary, chunk = 115;
     }
 
 
-
     function AddShareButtonForSearchItem(node) {
 
         document.getElementById('my115Dropdown').style.display = 'none';
@@ -5031,7 +4926,6 @@ let i, j, temporary, chunk = 115;
 
 
     }
-
 
 
     function ContinuedTask(taskJsonFileName) {
@@ -5119,10 +5013,7 @@ let i, j, temporary, chunk = 115;
         reader.readAsText(taskJsonFileName);
 
 
-
     }
-
-
 
 
 })();
