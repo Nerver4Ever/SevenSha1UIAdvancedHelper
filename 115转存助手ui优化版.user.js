@@ -2147,7 +2147,9 @@ function waitForKeyElements(
     waitForKeyElements('div#js_top_header_file_path_box', CreateSha1ButtonForSelectedItems);
     //隐藏截图中的uid
     waitForKeyElements('div[class^="fp-"]', HandleUidDiv);
-
+    //将所有点结尾的文件设置为可播放
+    waitForKeyElements(".list-contents", (function(){ $(".list-contents > ul > li").each(function(i, item) {if($(this).attr('title').substr(-1) == '.'){$(this).attr('iv',1);}});}));
+ 
     function HandleUidDiv(node) {
         node.hide();
         console.log("set uiddiv");
